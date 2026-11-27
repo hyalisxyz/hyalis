@@ -53,3 +53,38 @@ jobs:
         if: always()
         with:
           sarif_file: ${{ steps.slither.outputs.sarif }}
+
+  gitleaks:
+    name: Secret scan (gitleaks, full history)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  aderyn:
+    name: Aderyn (contracts)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: contracts
+    steps:
+      - uses: actions/checkout@v5
+      - uses: foundry-rs/foundry-toolchain@v1
+      - run: forge install foundry-rs/forge-std@v1.9.7 --no-git
+      - name: Install Aderyn
+        run: curl --proto '=https' --tlsv1.2 -LsSf https://github.com/cyfrin/aderyn/releases/latest/download/aderyn-installer.sh | bash
+      - name: Run Aderyn
+        run: |
+          export PATH="$HOME/.cargo/bin:$HOME/.aderyn/bin:$PATH"
+          aderyn --version
+          aderyn . -x test -o aderyn-report.md
+          cat aderyn-report.md
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: aderyn-report
+          path: contracts/aderyn-report.md
