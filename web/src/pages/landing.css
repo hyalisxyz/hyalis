@@ -316,6 +316,8 @@
 .tp-foot a { color: #fff; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: rgba(255, 255, 255, .45); }
 .tp-foot a:hover { text-decoration-color: #fff; }
 .tp-foot-fine { margin-top: 26px; font-size: 13px; }
+.tp-foot-ca { margin-bottom: -16px; }
+.tp-foot-ca code { overflow-wrap: anywhere; user-select: all; }
 .tp-foot .tp-brand { color: #fff; }
 
 /* ------------------------------------------------------------------ responsive */
