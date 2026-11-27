@@ -318,6 +318,8 @@
 .tp-foot-fine { margin-top: 26px; font-size: 13px; }
 .tp-foot-ca { margin-bottom: -16px; }
 .tp-foot-ca code { overflow-wrap: anywhere; user-select: all; }
+.tp-foot-ca a, .tp-foot-src a { color: inherit; }
+.tp-foot-src { margin-bottom: -16px; line-height: 1.7; }
 .tp-foot .tp-brand { color: #fff; }
 
 /* ------------------------------------------------------------------ responsive */

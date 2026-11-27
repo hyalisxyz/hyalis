@@ -86,7 +86,25 @@ export function SiteFooter({ lastAnchor, note }: { lastAnchor?: { tx: string; cl
           {lastAnchor ? <>Latest root <a href={txUrl(lastAnchor.tx)} target="_blank" rel="noreferrer">{short(lastAnchor.tx, 8, 6)}</a>, sealed {ago(lastAnchor.closedAt)}</> : null}
         </span>
       </div>
-      <p className="tp-wrap tp-foot-fine tp-foot-ca">$HYALIS <code>0xcb5b905d404ef2021ce1583efb28f992467c5b47</code> · Robinhood Chain · any other address is not ours</p>
+      <p className="tp-wrap tp-foot-fine tp-foot-ca">
+        $HYALIS{" "}
+        <a href="https://robinhoodchain.blockscout.com/token/0xcb5b905d404ef2021ce1583efb28f992467c5b47" target="_blank" rel="noreferrer"><code>0xcb5b905d404ef2021ce1583efb28f992467c5b47</code></a>{" "}
+        · Robinhood Chain · any other address is not ours
+      </p>
+      {/* Our own sources, linked from our own domain: the code, its history, the docs, the security review and every contract we deployed. */}
+      <p className="tp-wrap tp-foot-fine tp-foot-src">
+        Source <a href="https://github.com/hyalisxyz/hyalis" target="_blank" rel="noreferrer">GitHub</a>
+        {" · "}<a href="https://github.com/hyalisxyz/hyalis/commits/main" target="_blank" rel="noreferrer">Changelog</a>
+        {" · "}<a href="https://github.com/hyalisxyz/hyalis/releases" target="_blank" rel="noreferrer">Releases</a>
+        {" · "}<a href="/docs">Docs</a>
+        {" · "}<a href="https://github.com/hyalisxyz/hyalis/blob/main/AUDIT.md" target="_blank" rel="noreferrer">Security review</a>
+        {" · "}Contracts:{" "}
+        <a href="https://robinhoodchain.blockscout.com/address/0xeafa7d3b763cfa8d4509907263072722910631cf" target="_blank" rel="noreferrer">AgentVaultFactory</a>
+        {" · "}<a href="https://robinhoodchain.blockscout.com/address/0x88781501b8ca8a04c4ce287ccc4e20fb8996aa45" target="_blank" rel="noreferrer">UniswapV3Adapter</a>
+        {" · "}<a href="https://robinhoodchain.blockscout.com/address/0x8c4730f9fed980132eb6a8a681ceb558870de41a" target="_blank" rel="noreferrer">ReceiptRegistry</a>
+        {" · "}<a href="https://arbiscan.io/address/0x8c4730f9fed980132eb6a8a681ceb558870de41a" target="_blank" rel="noreferrer">Arbitrum factory</a>
+        {" · "}<a href="https://arbiscan.io/address/0x242be6fe51aaa67a9bac7592b755def337a416fb" target="_blank" rel="noreferrer">Arbitrum adapter</a>
+      </p>
       <p className="tp-wrap tp-foot-fine">Receipts sealed on Robinhood Chain. Agents stamped Real money trade real tokens on Robinhood Chain or Arbitrum One, from their own wallets or your own vault; the rest trade on paper at real prices. Not financial advice.{note ? ` ${note}` : ""}</p>
     </footer>
   );
