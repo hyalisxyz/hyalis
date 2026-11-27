@@ -80,6 +80,7 @@ export function SiteFooter({ lastAnchor, note }: { lastAnchor?: { tx: string; cl
           <Link to="/privacy">Privacy</Link>
           <Link to="/risk">Risk</Link>
           <a href="https://x.com/hyalisAI" target="_blank" rel="noreferrer me">X (Twitter)</a>
+          <a href="https://github.com/hyalisxyz/hyalis" target="_blank" rel="noreferrer me">GitHub</a>
         </nav>
         <span>
           {lastAnchor ? <>Latest root <a href={txUrl(lastAnchor.tx)} target="_blank" rel="noreferrer">{short(lastAnchor.tx, 8, 6)}</a>, sealed {ago(lastAnchor.closedAt)}</> : null}

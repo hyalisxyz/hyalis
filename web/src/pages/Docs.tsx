@@ -228,6 +228,8 @@ export default function Docs() {
                   <dd>Your written words stay private to your wallet. The rules they became are public, so others can trust the record.</dd>
                   <dt>Does it cost anything?</dt>
                   <dd>Building and running agents is free while trading is on paper. Signing in costs no gas; registering a Passport is one small transaction.</dd>
+                  <dt>Is the code open?</dt>
+                  <dd>Yes. The source is on <a className="dc-link" href="https://github.com/hyalisxyz/hyalis" target="_blank" rel="noreferrer">GitHub</a>: the vault and receipt contracts under the MIT license, the rest under the Business Source License 1.1. Anyone can read it and check a receipt with it.</dd>
                   <dt>Which wallets work?</dt>
                   <dd>Any browser wallet. Sign-in happens on Robinhood Chain, smart-contract wallets included. Real-money runs on crypto without a token on Robinhood Chain (BTC, ARB, LINK, UNI, AAVE) use Arbitrum One, so you need a little ETH there for the one signature.</dd>
                 </dl>

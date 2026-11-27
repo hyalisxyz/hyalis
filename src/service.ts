@@ -428,6 +428,12 @@ if (process.argv.includes("--once")) {
         .replace(/(<meta (?:property="og:image"|name="twitter:image") content=")[^"]*(" \/>)/g, (_, a, b) => (m.image ? `${a}${esc(m.image)}${b}` : `${a}${base}/og.png${b}`));
     app.get("*", (c) => {
       if (c.req.path.startsWith("/v1/")) return c.json({ error: "not found" }, 404);
+      // A file that is not there (often a code chunk from an older build) is a 404, never the
+      // page's HTML: served as a script, HTML fails to run and the page goes blank.
+      if (c.req.path.startsWith("/assets/") || /\.(js|mjs|css|map|json|png|jpe?g|webp|svg|ico|woff2?|txt|xml)$/i.test(c.req.path)) {
+        c.header("cache-control", "no-store");
+        return c.text("not found", 404);
+      }
       c.header("cache-control", "no-cache");
       const m = /^\/app\/agents\/([0-9a-f-]{36})$/i.exec(c.req.path);
       const a = m ? getAgent(db, m[1]!) : null;

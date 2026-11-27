@@ -1,4 +1,5 @@
-import { lazy, Suspense } from "react";
+import { Component, lazy, Suspense, type ReactNode } from "react";
+import { isChunkError, reloadForNewVersion } from "./lib/reload";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 
 // Each page loads its own code when it is opened, so the landing page does not carry the
@@ -34,9 +35,35 @@ function Loading() {
   return <div className="page-loading" aria-busy="true" />;
 }
 
+/**
+ * Any error while drawing a page: a missing chunk loads the new version; anything else shows a
+ * short message with a Reload button instead of a blank page.
+ */
+class PageErrors extends Component<{ children: ReactNode }, { failed: boolean }> {
+  state = { failed: false };
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+  componentDidCatch(e: unknown) {
+    if (isChunkError(e)) reloadForNewVersion();
+    else console.error(e);
+  }
+  render() {
+    if (!this.state.failed) return this.props.children;
+    return (
+      <main className="page" style={{ margin: "80px auto", textAlign: "center" }}>
+        <h1 style={{ fontFamily: "var(--display)" }}>Something went wrong</h1>
+        <p className="dim">This page did not load. Reloading usually fixes it.</p>
+        <button className="btn btn-primary" onClick={() => window.location.reload()}>Reload</button>
+      </main>
+    );
+  }
+}
+
 /** Every route; the browser wraps it in a BrowserRouter, the build-time prerender in a StaticRouter. */
 export function AppRoutes() {
   return (
+    <PageErrors>
       <Suspense fallback={<Loading />}>
         <Routes>
           <Route path="/" element={<Landing />} />
@@ -58,6 +85,7 @@ export function AppRoutes() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
+    </PageErrors>
   );
 }
 

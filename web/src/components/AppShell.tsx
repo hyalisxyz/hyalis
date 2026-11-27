@@ -56,7 +56,10 @@ export default function AppShell() {
           <div className="faint" style={{ marginTop: 4 }}>
             Stocks {market ? (market.open ? `open (${market.session})` : `closed (${market.reason})`) : "…"} · crypto 24/7
           </div>
-          <a className="faint" href="https://x.com/hyalisAI" target="_blank" rel="noreferrer me" style={{ display: "inline-block", marginTop: 8 }}>Follow @hyalisAI on X</a>
+          <div style={{ display: "flex", gap: 12, marginTop: 8 }}>
+            <a className="faint" href="https://x.com/hyalisAI" target="_blank" rel="noreferrer me">X @hyalisAI</a>
+            <a className="faint" href="https://github.com/hyalisxyz/hyalis" target="_blank" rel="noreferrer me">GitHub</a>
+          </div>
         </div>
       </aside>
       <div className="main">
