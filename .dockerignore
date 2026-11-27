@@ -1,0 +1,13 @@
+.env
+.env.*
+!.env.example
+node_modules
+data/*.db
+data/*.db-*
+data/*.log
+contracts/out
+contracts/cache
+test
+.git
+**/node_modules
+web/dist

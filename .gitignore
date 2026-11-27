@@ -1,0 +1,11 @@
+node_modules/
+data/*.db
+data/*.db-*
+data/*.log
+.env
+contracts/out/
+contracts/cache/
+.vscode/
+web/dist/
+data/identity-journal.json
+data/migration/

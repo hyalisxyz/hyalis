@@ -1,0 +1,872 @@
+{
+  "scannedAt": "2026-11-21T11:26:27.167Z",
+  "minDepth": 20000,
+  "found": {
+    "AAOI": {
+      "token": "0x521Cf887E6531c6F667b5BC4D896E5d9bfE8EB2E",
+      "pools": [
+        {
+          "quote": "USDG",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 100.70270578170368,
+          "depthUsd": 49.504182121686235,
+          "poolId": "0x6bc1ea0b7db08b5678e33db011195032362471ba810b1e616b99243e9fad3f34"
+        },
+        {
+          "quote": "ETH",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 68.74370702167504,
+          "depthUsd": 0.0003834643748797493,
+          "poolId": "0xf202e3bc7f0090d62fcd6c3c154d46c69d8144c1f6bda66a4400c05fec74dc8d"
+        }
+      ]
+    },
+    "AMAT": {
+      "token": "0x36046893810a7E7fCE501229d57dc3FC8c8716d0",
+      "pools": [
+        {
+          "quote": "ETH",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 50.046608366609455,
+          "depthUsd": 0.0001417775004883098,
+          "poolId": "0xe0b89abd528cc5ef11f3e3a862edb7f2eea4fad0bdf189759642c3ad38f0fc3d"
+        }
+      ]
+    },
+    "APLD": {
+      "token": "0xb8DBf92F9741c9ac1c32115E78581f23509916FD",
+      "pools": [
+        {
+          "quote": "ETH",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 27.254471828111345,
+          "depthUsd": 0.0019330236342327237,
+          "poolId": "0x8c69236d28fe4757019136746a309dafe01f346efbfbbbc7c142a714cf10f1ad"
+        }
+      ]
+    },
+    "ASTS": {
+      "token": "0x1AF6446f07eb1d97c546AFC8c9544cBDF3AD5137",
+      "pools": [
+        {
+          "quote": "USDG",
+          "fee": 500,
+          "tickSpacing": 10,
+          "priceUsd": 59.09999999999998,
+          "depthUsd": 0,
+          "poolId": "0x516d444bb56ece75e52d9858b1f9199d65e75022eaa372ab399e8b797fbbe3ed"
+        },
+        {
+          "quote": "USDG",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 64.85760861380754,
+          "depthUsd": 0,
+          "poolId": "0xcab707ba605f4e5b6f1e7679ab1b19f8a02241aba92f81b551e64ff118e52e8b"
+        }
+      ]
+    },
+    "AVGO": {
+      "token": "0x156E175DD063a8cE274C50654eF40e0032b3fbcF",
+      "pools": [
+        {
+          "quote": "ETH",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 234.28909942171038,
+          "depthUsd": 0.00033877390731783176,
+          "poolId": "0x8b889a6d8346da240607f13a00d284087873abec5f51d2c095c81b07f1c5f5a8"
+        },
+        {
+          "quote": "USDG",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 369.51254462177036,
+          "depthUsd": 0,
+          "poolId": "0xa19bec984f3ba60b7747f62f36d9a93735abac47470edc797fecb6e8f00e1a64"
+        }
+      ]
+    },
+    "BA": {
+      "token": "0x4D21483a44Bf67a86b77E3dA301411880797D452",
+      "pools": []
+    },
+    "BE": {
+      "token": "0x822CC93fFD030293E9842c30BBD678F530701867",
+      "pools": []
+    },
+    "CBRS": {
+      "token": "0x5c90450Bbb4273D7b2f17CF6917AEB237A569679",
+      "pools": [
+        {
+          "quote": "USDG",
+          "fee": 100,
+          "tickSpacing": 1,
+          "priceUsd": 203.99947066015474,
+          "depthUsd": 0,
+          "poolId": "0x82cc3e6cd4734dcec3864d55389f5dd688382162ac8ecba54256a5df812a0c5b"
+        }
+      ]
+    },
+    "CCL": {
+      "token": "0x9651342CeA770aE9a2969Ba2A52611523146aef9",
+      "pools": [
+        {
+          "quote": "USDG",
+          "fee": 500,
+          "tickSpacing": 10,
+          "priceUsd": 24.318638783667918,
+          "depthUsd": 0,
+          "poolId": "0x8b16d68af593eb6d8459dc2aa92b75b454fd59ea8753a39b22161c8c7f43b1c9"
+        }
+      ]
+    },
+    "CELH": {
+      "token": "0x8cF07C5A878945185d327aAa6e33FAa95F95e7bF",
+      "pools": [
+        {
+          "quote": "USDG",
+          "fee": 500,
+          "tickSpacing": 10,
+          "priceUsd": 31.440000000000005,
+          "depthUsd": 0,
+          "poolId": "0x22efa52546dfd230a971d16b44abafd70785e9d8b08d699ffe8d90ed90db0e37"
+        }
+      ]
+    },
+    "COST": {
+      "token": "0x4EA005168D7F09a7A0Ba9D1DEf21a479950E44C2",
+      "pools": [
+        {
+          "quote": "ETH",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 500.4926403756409,
+          "depthUsd": 0.0012850362090647547,
+          "poolId": "0xf01c08dff502cce3dc324909658f963b29723ba7a6f1a555eccdd46b20250b7f"
+        },
+        {
+          "quote": "USDG",
+          "fee": 500,
+          "tickSpacing": 10,
+          "priceUsd": 1199.9655745562193,
+          "depthUsd": 0,
+          "poolId": "0x99a64809744a0e7b219622c00ee61d9295c0e2e5cb075c44173c66d1ba82282c"
+        },
+        {
+          "quote": "USDG",
+          "fee": 3000,
+          "tickSpacing": 60,
+          "priceUsd": 955.7330610587982,
+          "depthUsd": 0,
+          "poolId": "0x9a95b39464bbcd2e0cdb10489b90fb59e06ada99e791a4a9f4f8095aa7178d75"
+        },
+        {
+          "quote": "USDG",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 917.0913238897829,
+          "depthUsd": 0,
+          "poolId": "0x55cca889271deb1ac7afc96530e2a1c949f93a9ba841706f7567c2c586c42c69"
+        }
+      ]
+    },
+    "CRWD": {
+      "token": "0xea72Ecca2d0f6bFA1394DBBCff85b52CD4233931",
+      "pools": []
+    },
+    "DDOG": {
+      "token": "0x27c99fBde9D0d2AA4f4Bfb4943f237843DdF6958",
+      "pools": [
+        {
+          "quote": "USDG",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 215.52808695652178,
+          "depthUsd": 0,
+          "poolId": "0x94a7ba8e8d1708321c1c6cf8697280899266aae750b9e3e0a2324ff37e07ff7f"
+        }
+      ]
+    },
+    "ELF": {
+      "token": "0x39EC44Bee4F6A116c6F9B8De566848a985C53C60",
+      "pools": [
+        {
+          "quote": "USDG",
+          "fee": 100,
+          "tickSpacing": 1,
+          "priceUsd": 82.56491927931971,
+          "depthUsd": 0,
+          "poolId": "0x93bca65907921a9aefeae4d9e2b1d72b2c5acd7d6acc7347bc448983ac6718fa"
+        }
+      ]
+    },
+    "F": {
+      "token": "0x25C288E6D899b9BC30160965aD9644c67e73bE0C",
+      "pools": [
+        {
+          "quote": "ETH",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 8.271488814760533,
+          "depthUsd": 0.0019053537385371269,
+          "poolId": "0xf10df7924c21263ee8debfb0414721fbd8d0480741811518d8bdc9f6645b9a3a"
+        },
+        {
+          "quote": "USDG",
+          "fee": 100,
+          "tickSpacing": 1,
+          "priceUsd": 12.080312622570158,
+          "depthUsd": 0,
+          "poolId": "0x34fd7ce0f3ef02d12cf72250d8ce9136a714c7415f87a5137434a2a24e83a420"
+        }
+      ]
+    },
+    "FLNC": {
+      "token": "0x282e87451E10fA6679BC7D76C69BE44cD3fC777C",
+      "pools": [
+        {
+          "quote": "ETH",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 333.8969962197793,
+          "depthUsd": 0.00217060107613748,
+          "poolId": "0x9c33f73ff8c96ab32242d4ab2369f4877a786c7be9671992d0bb7d5dde6593d7"
+        }
+      ]
+    },
+    "FUTU": {
+      "token": "0xeB30663bDFf0622Ef4e4E5cBb4E975F19f33f51D",
+      "pools": []
+    },
+    "GLW": {
+      "token": "0x7c04E6A3368F2A1DE3874f0e80d2e0A1a9915da6",
+      "pools": []
+    },
+    "INOD": {
+      "token": "0xf1953DAB6FaD537488d5A022361FfAa8B4c95eC6",
+      "pools": []
+    },
+    "INTU": {
+      "token": "0x56d23beE5f41A7120170b0c603Dae30128e460e9",
+      "pools": []
+    },
+    "IREN": {
+      "token": "0xF0AB0c93bE6F41369d302e55db1A96b3c430212D",
+      "pools": [
+        {
+          "quote": "ETH",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 57.36517719234856,
+          "depthUsd": 0.0005666897938443236,
+          "poolId": "0x6c1b6aa0a90efc1bd79283c4ee89feffef51b39c58d7fa57fd57892edca1133d"
+        },
+        {
+          "quote": "USDG",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 44.82481744122811,
+          "depthUsd": 0,
+          "poolId": "0x6c2506c21e8eecd757f69e730ad47fe8fbbef02ab7f4e671924f39385904dac1"
+        }
+      ]
+    },
+    "LITE": {
+      "token": "0x8eF20885F94e3D9bc7eB3080279188Bd5ED7c08C",
+      "pools": [
+        {
+          "quote": "USDG",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 889.2640943993575,
+          "depthUsd": 0,
+          "poolId": "0xcd67ed7cc003555ff2b76a5ce17c8e35c47ae58826f24f29ddad54419141a864"
+        }
+      ]
+    },
+    "LLY": {
+      "token": "0x8005d266423c7ea827372c9c864491e5786600ea",
+      "pools": [
+        {
+          "quote": "USDG",
+          "fee": 100,
+          "tickSpacing": 1,
+          "priceUsd": 1181.510437897385,
+          "depthUsd": 0,
+          "poolId": "0x424ee53045bb0b27378e5b24482398579067998660490679ea9657657e59331f"
+        },
+        {
+          "quote": "USDG",
+          "fee": 500,
+          "tickSpacing": 10,
+          "priceUsd": 2.938956807585584e-27,
+          "depthUsd": 0,
+          "poolId": "0x3bcdfbfc7ef605371f3bb997915504f5ac6295ccda348c918232c8f6f6857033"
+        },
+        {
+          "quote": "USDG",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 1159.32,
+          "depthUsd": 0,
+          "poolId": "0x37de634c28883268c8464cb9481db0982810df4bbd7b8dd07b48af8cceb20b97"
+        }
+      ]
+    },
+    "LULU": {
+      "token": "0x4e62068525Ab11FE768e29dfD00ef909B9803016",
+      "pools": [
+        {
+          "quote": "USDG",
+          "fee": 100,
+          "tickSpacing": 1,
+          "priceUsd": 120.05659418181364,
+          "depthUsd": 0,
+          "poolId": "0x89e097fa81aff6fd2e634fa1153e3787320923861e5686a0630eedad20008948"
+        },
+        {
+          "quote": "USDG",
+          "fee": 500,
+          "tickSpacing": 10,
+          "priceUsd": 121.40760822658585,
+          "depthUsd": 0,
+          "poolId": "0x6d8f470b9123ddf9a6d3d3b6530f9280e9a4904b50b8cf0045f2577f09a87cf2"
+        }
+      ]
+    },
+    "LUNR": {
+      "token": "0xa5D4968421bA94814Be3B136b15cf422101aC1a3",
+      "pools": [
+        {
+          "quote": "ETH",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 2.084793368091202,
+          "depthUsd": 0.00020734999156979322,
+          "poolId": "0x3fcf6d3b29ac0101c4283900148cbebe305e95ea9bf981f2e0ad8922b7936e58"
+        }
+      ]
+    },
+    "MDB": {
+      "token": "0xDdf2266b79abf0B48898959B0ed6E6adf512be74",
+      "pools": [
+        {
+          "quote": "USDG",
+          "fee": 100,
+          "tickSpacing": 1,
+          "priceUsd": 318.971286759402,
+          "depthUsd": 0,
+          "poolId": "0x76dbc482463d7851e078f275cc70b6a21009f5faec1492828a53be877c87e4a8"
+        }
+      ]
+    },
+    "MRVL": {
+      "token": "0x62fd0668e10D8B72339BE2DCF7643001688ff13B",
+      "pools": [
+        {
+          "quote": "ETH",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 137.15651854095395,
+          "depthUsd": 0.000773712152291185,
+          "poolId": "0x8816fed7dadcbc4afff815b3bcf51433e1ed89feea36ef35d8fd744697a7f4d4"
+        },
+        {
+          "quote": "USDG",
+          "fee": 100,
+          "tickSpacing": 1,
+          "priceUsd": 207.00356422653087,
+          "depthUsd": 0,
+          "poolId": "0x30379634c09adb3c3db44e4a47e9ec1db15f597c451e3c10aac4344a06940275"
+        },
+        {
+          "quote": "USDG",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 211.23359946812525,
+          "depthUsd": 0,
+          "poolId": "0xd20feebb32266449a38dab2795ef2c92e0413298fe557f7530883874dadca3ae"
+        }
+      ]
+    },
+    "MXL": {
+      "token": "0x48961813349333209994750ffA89b3c5C22eC969",
+      "pools": []
+    },
+    "NFLX": {
+      "token": "0xE0444EF8BF4eD74f74FD73686e2ddF4C1c5591E8",
+      "pools": [
+        {
+          "quote": "ETH",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 54.84226436768953,
+          "depthUsd": 0.0009449063274428592,
+          "poolId": "0x8fa61c93c2bb87d6a331d9d1ca57b89a82914054b80c2db6d8cb2a975b635400"
+        },
+        {
+          "quote": "ETH",
+          "fee": 100,
+          "tickSpacing": 1,
+          "priceUsd": 35.036577458768676,
+          "depthUsd": 0.0002781095649859378,
+          "poolId": "0x522c1ccde43f6c742ac3b406e0d5589dc09c6e4c73769c47800ba53acbda7894"
+        },
+        {
+          "quote": "USDG",
+          "fee": 3000,
+          "tickSpacing": 60,
+          "priceUsd": 68.11966035454468,
+          "depthUsd": 0,
+          "poolId": "0x4046c7230fa2f8b1d5440dc21e710e2cd38b469a7b1e9bcc492def7dba87f26a"
+        },
+        {
+          "quote": "USDG",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 78.58,
+          "depthUsd": 0,
+          "poolId": "0xce5a04fc9cb97be41a0837dde1b9b52df1d6fe2f78e8c5f8fc399cd97cfd3cb9"
+        }
+      ]
+    },
+    "NNE": {
+      "token": "0xBEF75684C43c4ea7BD18Dd532a2244674Ee8b926",
+      "pools": [
+        {
+          "quote": "USDG",
+          "fee": 500,
+          "tickSpacing": 10,
+          "priceUsd": 16.75990710074566,
+          "depthUsd": 0,
+          "poolId": "0x84762c0df85211ef24cfe02b9e62535e3eff59252a731d20e1138e39b23eb317"
+        }
+      ]
+    },
+    "NOW": {
+      "token": "0x0C3260aF4B8f13a69c4c2dFb84fD667890CDFa14",
+      "pools": [
+        {
+          "quote": "ETH",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 197.2128228937909,
+          "depthUsd": 0.0008316313504660161,
+          "poolId": "0x59cbac0fe9012b17cbebaf745409dd64f3ff5c3ec4ec2199d7819593c9cfb40c"
+        },
+        {
+          "quote": "USDG",
+          "fee": 500,
+          "tickSpacing": 10,
+          "priceUsd": 138.1998872393204,
+          "depthUsd": 0,
+          "poolId": "0x8d18f3f41dbaff828b631249ae769aaee7f8535f4c0ce923c46cf261fbca8f2d"
+        },
+        {
+          "quote": "USDG",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 141.47953005865315,
+          "depthUsd": 0,
+          "poolId": "0x896f0b11e640448c976352087c4ff0d8e13a197de3389e77b8670bb6c2e763a9"
+        }
+      ]
+    },
+    "NU": {
+      "token": "0x408c14038a04f7bD235329E26d2bf569ee20e250",
+      "pools": [
+        {
+          "quote": "ETH",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 2.360790282841377,
+          "depthUsd": 0.0004769267375720592,
+          "poolId": "0x7719a757273a825476b07c6c8bd722e68de7f51dc73c21abe5f5c2a9aac1201b"
+        }
+      ]
+    },
+    "NVTS": {
+      "token": "0xbE6702d7b70315376dC48a3293f24f0982F86386",
+      "pools": [
+        {
+          "quote": "ETH",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 66.63731438842574,
+          "depthUsd": 0.0004926041317301921,
+          "poolId": "0x5dc7da8d4a0d4ab6436a73ed6879f0c098b02c510359c87c9f85d28b96c0993e"
+        }
+      ]
+    },
+    "P": {
+      "token": "0x1Cdad396DB64BDa184d5182A97Dd9B3C62100b7D",
+      "pools": [
+        {
+          "quote": "USDG",
+          "fee": 100,
+          "tickSpacing": 1,
+          "priceUsd": 80.99467887070458,
+          "depthUsd": 0,
+          "poolId": "0x60488494a31905b302ea8f6ba7623b331755c9823bf864c7deb1b115ea48ce05"
+        }
+      ]
+    },
+    "PENG": {
+      "token": "0x9b23573b156B52565012F5cE02CDF60AFBaa70Be",
+      "pools": [
+        {
+          "quote": "USDG",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 53.35715985458788,
+          "depthUsd": 0,
+          "poolId": "0xcb467dad3c62c69100c6af9188c35b4adf22995fcd15c74454dad468b5d0b489"
+        }
+      ]
+    },
+    "POET": {
+      "token": "0xcf6B2D875361be807EAfa57458c80f28521F9333",
+      "pools": [
+        {
+          "quote": "ETH",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 0.7223836326885623,
+          "depthUsd": 0.0001664290427893078,
+          "poolId": "0x20c66cd9ff86c4a68315c780effbf940ca7a3bde8eeafbf013b33a8f715cef77"
+        }
+      ]
+    },
+    "PR": {
+      "token": "0x4189F0c66EBBB0bfeF1C31f763131361EF32f77C",
+      "pools": [
+        {
+          "quote": "USDG",
+          "fee": 100,
+          "tickSpacing": 1,
+          "priceUsd": 21.99950655602682,
+          "depthUsd": 0,
+          "poolId": "0x0eff15094a610935f2ce5db9486a6d31d6dd6e18707ea3e96ed6a8ea0a795d81"
+        }
+      ]
+    },
+    "QBTS": {
+      "token": "0xC583c60aeF9Dc401Da72cEC1B404743a93cea1Cc",
+      "pools": []
+    },
+    "QCOM": {
+      "token": "0x0f17206447090e464C277571124dD2688E48AEA9",
+      "pools": [
+        {
+          "quote": "USDG",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 172.80201487458046,
+          "depthUsd": 0,
+          "poolId": "0x9887fe23d58faae72c6d8d2292b59986c6dc562f78e7bb07136900c46f86ec3a"
+        }
+      ]
+    },
+    "QUBT": {
+      "token": "0x59818904ab4cE163b3cE4FfB64f2D6Ca02c434B4",
+      "pools": [
+        {
+          "quote": "ETH",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 4.444591648204503,
+          "depthUsd": 0.00039543639459728447,
+          "poolId": "0x53d2055475b101ac01729c5feb1f6de6b37a827c0a8855a886c74ff08db8cf16"
+        }
+      ]
+    },
+    "RBLX": {
+      "token": "0xF0C4BF4C582cb3836e98394b1d4e7B7281101bE8",
+      "pools": [
+        {
+          "quote": "USDG",
+          "fee": 100,
+          "tickSpacing": 1,
+          "priceUsd": 51.51213297434213,
+          "depthUsd": 0,
+          "poolId": "0x3125215a38f76fa0e2efb6123228333423111286a8a5e7f21ad99b9d3719beaa"
+        }
+      ]
+    },
+    "RDDT": {
+      "token": "0x05b37Fb53A299a1b874A619e1c4C404D52C36F4C",
+      "pools": [
+        {
+          "quote": "USDG",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 86.25685607617683,
+          "depthUsd": 21587.63142373128,
+          "poolId": "0xec481672a94cfe42e2d8c996b7eaeee8a93093d56bd01c1714341971e3f406c1"
+        },
+        {
+          "quote": "ETH",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 4.813715688579581e-36,
+          "depthUsd": 0,
+          "poolId": "0x03d13c434522400eac67a5e61c48c5b2a4f32f8929eb4e5e74d8229c59239d11"
+        }
+      ]
+    },
+    "RDW": {
+      "token": "0x92Ef19E82bD8fF36661DE838D5eaE7e5CEF0EfFE",
+      "pools": [
+        {
+          "quote": "ETH",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 38.50646288222796,
+          "depthUsd": 0.000965153492190272,
+          "poolId": "0x8c13a3c17d7894122916953200c55e2cc676204095832dff136f90daa93c6822"
+        }
+      ]
+    },
+    "RIVN": {
+      "token": "0xB1BF26c1D20ff267A4f93550d1E0d06ac40a114B",
+      "pools": [
+        {
+          "quote": "USDG",
+          "fee": 100,
+          "tickSpacing": 1,
+          "priceUsd": 16.291819580927328,
+          "depthUsd": 0,
+          "poolId": "0x48ce3b4a137ea3a81dfb90de2012d5e332d6f28d0baad07dece50e212c858bc2"
+        },
+        {
+          "quote": "USDG",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 16.214977676105182,
+          "depthUsd": 0,
+          "poolId": "0x4e7d9490e0822e8a030e779a324949c62606ab44cbcaba0dd20a3d8c2781d0c3"
+        }
+      ]
+    },
+    "SATS": {
+      "token": "0x95052ddcd5DC25641657424A8Cf04834997E1730",
+      "pools": [
+        {
+          "quote": "USDG",
+          "fee": 100,
+          "tickSpacing": 1,
+          "priceUsd": 95.00931591035163,
+          "depthUsd": 0,
+          "poolId": "0xb8b41dbaa759e9ad502c49f9c2ea7a7abeae0fd0bc5d82e32fe5a0a49d1177f6"
+        }
+      ]
+    },
+    "SHOP": {
+      "token": "0xF53F66751B1Eff985311b693531E3290F600c410",
+      "pools": [
+        {
+          "quote": "USDG",
+          "fee": 100,
+          "tickSpacing": 1,
+          "priceUsd": 120.99665006653107,
+          "depthUsd": 0,
+          "poolId": "0x04c6153e7ac55ba501074e01f1c01e242d0429280f0a4104647049029e20e5a7"
+        },
+        {
+          "quote": "USDG",
+          "fee": 500,
+          "tickSpacing": 10,
+          "priceUsd": 140.75963107539087,
+          "depthUsd": 0,
+          "poolId": "0xb111f7c791a1bb61ebcf3062b9708b6919b958198d0b77b7c019c23e160caaa3"
+        },
+        {
+          "quote": "USDG",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 148.36500879301562,
+          "depthUsd": 0,
+          "poolId": "0x9bda1f42166624d5b1f04ddeb91f77c040f5a09b6f4be81af641f41e1552a53b"
+        }
+      ]
+    },
+    "SKHY": {
+      "token": "0x84CAb63bc87912E71ad199ff14A0bA45de68FeF8",
+      "pools": [
+        {
+          "quote": "USDG",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 178.34056632462753,
+          "depthUsd": 0,
+          "poolId": "0x8107f97277321f2899eba8d6721411e34cf368c6e24c9f0abb1658733e548601"
+        }
+      ]
+    },
+    "SMCI": {
+      "token": "0xc01aA1fECeC0605b13bc84874ff7256C0f5F562a",
+      "pools": [
+        {
+          "quote": "USDG",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 40.33563984451108,
+          "depthUsd": 0,
+          "poolId": "0xfe06387ccbe8b1b7dd61ff26dd713049a321bd17934cc3b2f2100ba323b2d3ba"
+        }
+      ]
+    },
+    "SOFI": {
+      "token": "0x98E75885157C80992A8D41b696D8c9C6Fb30A926",
+      "pools": [
+        {
+          "quote": "ETH",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 3.1911227612114526,
+          "depthUsd": 0.0006251291675921244,
+          "poolId": "0xba8f540b9be29b72871bc7cb9c0017e107dc2908a0e3d56c195dba9d54156b01"
+        },
+        {
+          "quote": "USDG",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 18.99558267463432,
+          "depthUsd": 0,
+          "poolId": "0xac2b6e212fdcb7918bff829f10d8be22fd610610fbb9a92c88409f8c91093064"
+        }
+      ]
+    },
+    "SOXX": {
+      "token": "0x75742c18BC1f1C5c5f448f4C9D9C6F66dafAAa38",
+      "pools": []
+    },
+    "SPMO": {
+      "token": "0xAd622320e520de39e72d41EF07438C3Fd3354875",
+      "pools": []
+    },
+    "TSEM": {
+      "token": "0x89776d4Cd68193597A2fC132cfaC1fDe36CCeA8a",
+      "pools": [
+        {
+          "quote": "ETH",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 21983.55370621356,
+          "depthUsd": 0.003157669710341355,
+          "poolId": "0xaececdd922057ec9082c5ee18ae5516873d38fd088e05bb388478d2f764f9e60"
+        }
+      ]
+    },
+    "TTWO": {
+      "token": "0x5e81213613b6B86EaB4c6c50d718d34359459786",
+      "pools": [
+        {
+          "quote": "USDG",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 210.94642621262494,
+          "depthUsd": 6776.597973066862,
+          "poolId": "0x131e6ebeeedb524a1e7590aa3eea3bc8782b5425a78d5128c0ca955190d0ea69"
+        }
+      ]
+    },
+    "UMC": {
+      "token": "0x0E6e67Ba88e7b5d9B67636A215c76779B948dE79",
+      "pools": []
+    },
+    "UPS": {
+      "token": "0xf23250dac154D05Bb671CB0d0eBEf3c635c79CE2",
+      "pools": []
+    },
+    "WDAY": {
+      "token": "0x82DA4646242e1D962e96e932269Dc644c94a9CaA",
+      "pools": [
+        {
+          "quote": "USDG",
+          "fee": 100,
+          "tickSpacing": 1,
+          "priceUsd": 142.98316940880306,
+          "depthUsd": 0,
+          "poolId": "0x754b54bf5c3af62d7a3c7a4f53f5c11047b0c7beecb8cdccdb9c56071f2f499c"
+        }
+      ]
+    },
+    "XLK": {
+      "token": "0x15Cd20759CE7F3285c29A319dE2D1A2e098c6f43",
+      "pools": [
+        {
+          "quote": "USDG",
+          "fee": 100,
+          "tickSpacing": 1,
+          "priceUsd": 182.99263310250097,
+          "depthUsd": 0,
+          "poolId": "0x6eeb5d4957c9b7f4d3cb86941ff5b479013365f96cd4df688c73713cfc6f9a2d"
+        }
+      ]
+    },
+    "XNDU": {
+      "token": "0xA8eB3BCcbf2017eE7CBfb652eB51CF2E1B153289",
+      "pools": []
+    },
+    "XOM": {
+      "token": "0xf9B46d3D1B22199D4D1025a9cEDB540A33F1a2d5",
+      "pools": [
+        {
+          "quote": "ETH",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 1.9773035643248875,
+          "depthUsd": 0.0000421177259106197,
+          "poolId": "0xea871a5910ea477f40a11fcbffc1d66a032d16da98fc17151ef7caf9f614a454"
+        },
+        {
+          "quote": "ETH",
+          "fee": 500,
+          "tickSpacing": 10,
+          "priceUsd": 139.67129805373682,
+          "depthUsd": 0,
+          "poolId": "0x62b93cde61354c2e029f7d783e6e9dac033ddb2abdaee03c3cb977cda18e1eb9"
+        }
+      ]
+    },
+    "ZM": {
+      "token": "0x44c4F142009036cF477eD2d09932051843137CF1",
+      "pools": [
+        {
+          "quote": "USDG",
+          "fee": 100,
+          "tickSpacing": 1,
+          "priceUsd": 93.4953379108393,
+          "depthUsd": 0,
+          "poolId": "0xaed20e118b69d827aa71da6358484d9e8ec6d4c2dadf99f118efe5fa47fc3e98"
+        },
+        {
+          "quote": "USDG",
+          "fee": 500,
+          "tickSpacing": 10,
+          "priceUsd": 93.9920528404974,
+          "depthUsd": 0,
+          "poolId": "0x011fd8e398d8a7f4f25362150a293b30bf4d4f8abd7c923ddeaefbbc819b6b2d"
+        },
+        {
+          "quote": "USDG",
+          "fee": 10000,
+          "tickSpacing": 200,
+          "priceUsd": 98.70870130029866,
+          "depthUsd": 0,
+          "poolId": "0x520463aeb02d0b2dc276473a8781c877d4e8170295aaa0b4e3053a7414243495"
+        }
+      ]
+    },
+    "ZS": {
+      "token": "0x7dc013eB55e436f30d7ED1AFE4E36d6e45e3c3f7",
+      "pools": []
+    }
+  }
+}

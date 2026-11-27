@@ -1,0 +1,322 @@
+{
+  "contractName": "ReceiptRegistry",
+  "abi": [
+    {
+      "type": "constructor",
+      "inputs": [
+        {
+          "name": "publisher_",
+          "type": "address",
+          "internalType": "address"
+        },
+        {
+          "name": "epochSeconds_",
+          "type": "uint64",
+          "internalType": "uint64"
+        }
+      ],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "anchor",
+      "inputs": [
+        {
+          "name": "epoch",
+          "type": "uint64",
+          "internalType": "uint64"
+        },
+        {
+          "name": "root",
+          "type": "bytes32",
+          "internalType": "bytes32"
+        },
+        {
+          "name": "prevRoot",
+          "type": "bytes32",
+          "internalType": "bytes32"
+        },
+        {
+          "name": "leafCount",
+          "type": "uint32",
+          "internalType": "uint32"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "anchorCount",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint64",
+          "internalType": "uint64"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "anchorOf",
+      "inputs": [
+        {
+          "name": "epoch",
+          "type": "uint64",
+          "internalType": "uint64"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "tuple",
+          "internalType": "struct ReceiptRegistry.Anchor",
+          "components": [
+            {
+              "name": "root",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "prevRoot",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "leafCount",
+              "type": "uint32",
+              "internalType": "uint32"
+            },
+            {
+              "name": "anchoredAt",
+              "type": "uint64",
+              "internalType": "uint64"
+            }
+          ]
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "epochSeconds",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint64",
+          "internalType": "uint64"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "lastEpoch",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint64",
+          "internalType": "uint64"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "lastRoot",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32",
+          "internalType": "bytes32"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "leafOf",
+      "inputs": [
+        {
+          "name": "recordHash",
+          "type": "bytes32",
+          "internalType": "bytes32"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32",
+          "internalType": "bytes32"
+        }
+      ],
+      "stateMutability": "pure"
+    },
+    {
+      "type": "function",
+      "name": "publisher",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "verifyLeaf",
+      "inputs": [
+        {
+          "name": "epoch",
+          "type": "uint64",
+          "internalType": "uint64"
+        },
+        {
+          "name": "leaf",
+          "type": "bytes32",
+          "internalType": "bytes32"
+        },
+        {
+          "name": "proof",
+          "type": "bytes32[]",
+          "internalType": "bytes32[]"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool",
+          "internalType": "bool"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "verifyRecord",
+      "inputs": [
+        {
+          "name": "epoch",
+          "type": "uint64",
+          "internalType": "uint64"
+        },
+        {
+          "name": "recordHash",
+          "type": "bytes32",
+          "internalType": "bytes32"
+        },
+        {
+          "name": "proof",
+          "type": "bytes32[]",
+          "internalType": "bytes32[]"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool",
+          "internalType": "bool"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "event",
+      "name": "Anchored",
+      "inputs": [
+        {
+          "name": "epoch",
+          "type": "uint64",
+          "indexed": true,
+          "internalType": "uint64"
+        },
+        {
+          "name": "root",
+          "type": "bytes32",
+          "indexed": false,
+          "internalType": "bytes32"
+        },
+        {
+          "name": "prevRoot",
+          "type": "bytes32",
+          "indexed": false,
+          "internalType": "bytes32"
+        },
+        {
+          "name": "leafCount",
+          "type": "uint32",
+          "indexed": false,
+          "internalType": "uint32"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "error",
+      "name": "EmptyRoot",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "EpochNotAfterLast",
+      "inputs": [
+        {
+          "name": "epoch",
+          "type": "uint64",
+          "internalType": "uint64"
+        },
+        {
+          "name": "lastEpoch",
+          "type": "uint64",
+          "internalType": "uint64"
+        }
+      ]
+    },
+    {
+      "type": "error",
+      "name": "EpochNotEnded",
+      "inputs": [
+        {
+          "name": "epoch",
+          "type": "uint64",
+          "internalType": "uint64"
+        }
+      ]
+    },
+    {
+      "type": "error",
+      "name": "NoLeaves",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "NotPublisher",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "WrongPrevRoot",
+      "inputs": [
+        {
+          "name": "expected",
+          "type": "bytes32",
+          "internalType": "bytes32"
+        },
+        {
+          "name": "given",
+          "type": "bytes32",
+          "internalType": "bytes32"
+        }
+      ]
+    }
+  ],
+  "bytecode": "0x60c060405234801561001057600080fd5b50604051610aff380380610aff83398101604081905261002f916100e9565b6001600160a01b03821661007e5760405162461bcd60e51b81526020600482015260116024820152707075626c6973686572206973207a65726f60781b60448201526064015b60405180910390fd5b603c816001600160401b031610156100ca5760405162461bcd60e51b815260206004820152600f60248201526e195c1bd8da081d1bdbc81cda1bdc9d608a1b6044820152606401610075565b6001600160a01b039091166080526001600160401b031660a05261013b565b600080604083850312156100fc57600080fd5b82516001600160a01b038116811461011357600080fd5b60208401519092506001600160401b038116811461013057600080fd5b809150509250929050565b60805160a05161099161016e600039600081816102ca0152610541015260008181610260015261046901526109916000f3fe608060405234801561001057600080fd5b50600436106100be5760003560e01c8063877cdbfd11610076578063b58166f21161005b578063b58166f2146102a7578063ca083c52146102b0578063fb5bb0c3146102c557600080fd5b8063877cdbfd146102485780638c72c54e1461025b57600080fd5b806334f96c8c116100a757806334f96c8c146101c15780634ee876dd146101d5578063554c29481461022557600080fd5b806306a4c983146100c357806334defa7c146100f5575b600080fd5b6000546100d79067ffffffffffffffff1681565b60405167ffffffffffffffff90911681526020015b60405180910390f35b61017e6101033660046107dd565b604080516080808201835260008083526020808401829052838501829052606093840182905267ffffffffffffffff9586168252600381529084902084519283018552805483526001810154918301919091526002015463ffffffff8116938201939093526401000000009092049092169181019190915290565b6040516100ec9190815181526020808301519082015260408083015163ffffffff169082015260609182015167ffffffffffffffff169181019190915260800190565b6002546100d79067ffffffffffffffff1681565b6102176101e33660046107ff565b6040516000602082018190526021820183905290604101604051602081830303815290604052805190602001209050919050565b6040519081526020016100ec565b610238610233366004610818565b6102ec565b60405190151581526020016100ec565b610238610256366004610818565b61033c565b6102827f000000000000000000000000000000000000000000000000000000000000000081565b60405173ffffffffffffffffffffffffffffffffffffffff90911681526020016100ec565b61021760015481565b6102c36102be3660046108a5565b610451565b005b6100d77f000000000000000000000000000000000000000000000000000000000000000081565b60006103318561032a866040516000602082018190526021820183905290604101604051602081830303815290604052805190602001209050919050565b858561033c565b90505b949350505050565b67ffffffffffffffff841660009081526003602052604081205480610365576000915050610334565b8460005b84811015610446576000868683818110610385576103856108f6565b9050602002013590508083106103ea576040517f0100000000000000000000000000000000000000000000000000000000000000602082015260218101829052604181018490526061016040516020818303038152906040528051906020012061043b565b6040517f010000000000000000000000000000000000000000000000000000000000000060208201526021810184905260418101829052606101604051602081830303815290604052805190602001205b925050600101610369565b501495945050505050565b3373ffffffffffffffffffffffffffffffffffffffff7f000000000000000000000000000000000000000000000000000000000000000016146104c0576040517f6cc8883a00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b60025467ffffffffffffffff16158015906104eb575060005467ffffffffffffffff90811690851611155b1561053f576000546040517f220b876200000000000000000000000000000000000000000000000000000000815267ffffffffffffffff808716600483015290911660248201526044015b60405180910390fd5b7f000000000000000000000000000000000000000000000000000000000000000067ffffffffffffffff168467ffffffffffffffff1660016105819190610954565b61058b919061096d565b4210156105d0576040517f5dd3469000000000000000000000000000000000000000000000000000000000815267ffffffffffffffff85166004820152602401610536565b6001548214610619576001546040517f385ac16b000000000000000000000000000000000000000000000000000000008152600481019190915260248101839052604401610536565b82610650576040517f53ce4ece00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b8063ffffffff16600003610690576040517fbaec3d9a00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b60408051608081018252848152602080820185815263ffffffff80861684860190815267ffffffffffffffff428116606087019081528b82166000818152600390975288872097518855945160018089019190915592516002978801805492518416640100000000027fffffffffffffffffffffffffffffffffffffffff00000000000000000000000090931691909516171790925583547fffffffffffffffffffffffffffffffffffffffffffffffff00000000000000009081168417909455888155845480831690910190911692169190911790915590517fe55e7e5b5898e4cc04193061e9bcc56b76c7acc89835be8221f952f25763873b906107b290869086908690928352602083019190915263ffffffff16604082015260600190565b60405180910390a250505050565b803567ffffffffffffffff811681146107d857600080fd5b919050565b6000602082840312156107ef57600080fd5b6107f8826107c0565b9392505050565b60006020828403121561081157600080fd5b5035919050565b6000806000806060858703121561082e57600080fd5b610837856107c0565b935060208501359250604085013567ffffffffffffffff81111561085a57600080fd5b8501601f8101871361086b57600080fd5b803567ffffffffffffffff81111561088257600080fd5b8760208260051b840101111561089757600080fd5b949793965060200194505050565b600080600080608085870312156108bb57600080fd5b6108c4856107c0565b93506020850135925060408501359150606085013563ffffffff811681146108eb57600080fd5b939692955090935050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052603260045260246000fd5b7f4e487b7100000000000000000000000000000000000000000000000000000000600052601160045260246000fd5b8082018082111561096757610967610925565b92915050565b80820281158282048414176109675761096761092556fea164736f6c634300081c000a"
+}

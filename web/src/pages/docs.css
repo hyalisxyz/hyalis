@@ -1,0 +1,65 @@
+/* Docs: the landing page's paper and ink, set for reading. Scoped under .dc (with .tp tokens). */
+
+.dc-hero { padding: 150px 0 110px; }
+.dc-hero .tp-sub { max-width: 36em; }
+
+.dc-body { padding: 90px 0 130px; }
+.dc-grid { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 72px; align-items: start; }
+
+/* contents */
+.dc-toc { position: sticky; top: 96px; }
+.dc-toc p { margin: 0 0 12px; font: 400 13px/1.4 var(--mono); color: var(--fade); }
+.dc-toc ol { list-style: none; margin: 0; padding: 0; border-left: 2px dashed rgba(23, 23, 27, .22); }
+.dc-toc a { display: block; padding: 7px 0 7px 16px; margin-left: -2px; border-left: 2px solid transparent; font-size: 15px; color: var(--fade); }
+.dc-toc a:hover { color: var(--thermal); }
+.dc-toc a[aria-current] { color: var(--field); font-weight: 700; border-left-color: var(--field); }
+.dc-toc-cta { margin-top: 26px; height: 48px; padding: 0 22px; font-size: 15px; }
+
+/* reading column */
+.dc-text { max-width: 760px; font-size: 17px; line-height: 1.65; }
+.dc-sec { padding-top: 10px; margin-bottom: 72px; scroll-margin-top: 90px; }
+.dc-sec h2 { margin: 0 0 20px; font: 900 clamp(38px, 4.2vw, 58px)/0.9 var(--display); font-stretch: var(--cond); letter-spacing: -0.005em; }
+.dc-sec h3 { margin: 30px 0 8px; font: 800 22px/1.15 var(--display); font-stretch: 85%; }
+.dc-sec p { margin: 0 0 16px; }
+.dc-text b { font-weight: 700; }
+.dc-text code { padding: 1px 6px; background: #fff; box-shadow: inset 0 0 0 1px rgba(23, 23, 27, .14); font: 400 .86em/1.5 var(--mono); word-break: break-word; }
+.dc-link { color: var(--field); font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.dc-link:hover { text-decoration-color: transparent; }
+.dc-addr { font: 400 14px/1.5 var(--mono); color: var(--field); text-decoration: underline; text-underline-offset: 3px; word-break: break-all; }
+.dc-note { padding: 14px 18px; background: #fff; border-left: 4px solid var(--field); color: var(--thermal); font-size: 15.5px; }
+
+.dc-steps { margin: 0 0 20px; padding: 0; list-style: none; counter-reset: dc; }
+.dc-steps li { position: relative; padding: 0 0 14px 48px; counter-increment: dc; }
+.dc-steps li::before { content: counter(dc); position: absolute; left: 0; top: -4px; font: 900 34px/1 var(--display); font-stretch: var(--cond); color: var(--field); }
+
+.dc-text blockquote { margin: 6px 0 20px; padding: 18px 22px; background: #fff; box-shadow: 6px 6px 0 var(--field); border: 2px solid var(--thermal); font: 400 16px/1.55 var(--mono); }
+
+.dc-table { width: 100%; margin: 6px 0 22px; border-collapse: collapse; background: #fff; font-size: 15px; line-height: 1.45; box-shadow: 0 1px 0 rgba(23, 23, 27, .08), 0 14px 30px -22px rgba(23, 23, 27, .4); }
+.dc-table th { padding: 12px 16px; text-align: left; font: 400 12.5px/1.3 var(--mono); color: var(--fade); border-bottom: 2px solid var(--thermal); }
+.dc-table td { padding: 12px 16px; vertical-align: top; border-bottom: 1px dashed rgba(23, 23, 27, .22); }
+.dc-table tr:last-child td { border-bottom: 0; }
+.dc-table td:first-child { font-weight: 600; }
+.dc-api td:first-child { white-space: nowrap; font-weight: 400; }
+.dc-api code { background: none; box-shadow: none; padding: 0; }
+
+.dc-faq dt { margin-top: 22px; font: 800 20px/1.25 var(--display); font-stretch: 90%; }
+.dc-faq dd { margin: 6px 0 0; color: var(--fade); }
+
+@media (max-width: 1000px) {
+  .dc-grid { grid-template-columns: minmax(0, 1fr); gap: 30px; }
+  .dc-toc { position: static; }
+  .dc-toc ol { display: flex; flex-wrap: wrap; gap: 4px 8px; border-left: 0; }
+  .dc-toc a { padding: 6px 12px; margin: 0; border: 1px solid rgba(23, 23, 27, .2); border-radius: 999px; font-size: 14px; }
+  .dc-toc a[aria-current] { border-color: var(--field); }
+  .dc .dc-toc-cta { display: none; }
+}
+@media (max-width: 760px) {
+  .dc-hero { padding: 110px 0 80px; }
+  .dc-body { padding: 70px 0 90px; }
+  .dc-text { font-size: 16px; }
+  .dc-table { display: block; overflow-x: auto; }
+  .dc-api td:first-child { white-space: normal; word-break: break-all; }
+}
+
+.dc-legal-h { margin: 30px 0 8px; font: 800 22px/1.15 var(--display); font-stretch: 80%; }
+.dc-legal-h:first-of-type { margin-top: 10px; }

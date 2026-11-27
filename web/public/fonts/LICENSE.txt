@@ -1,0 +1,7 @@
+These fonts are licensed under the SIL Open Font License, Version 1.1 (https://openfontlicense.org).
+
+- Archivo, Copyright 2020 The Archivo Project Authors (https://github.com/Omnibus-Type/Archivo)
+- Instrument Sans, Copyright 2022 The Instrument Sans Project Authors (https://github.com/Instrument/instrument-sans)
+- IBM Plex Mono, Copyright 2017 IBM Corp. (https://github.com/IBM/plex)
+
+Served here unmodified (latin subset as distributed by Google Fonts).

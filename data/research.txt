@@ -1,0 +1,39 @@
+history 30d; train 2026-10-22..2026-11-06, test ..2026-11-21
+
+pullback-in-uptrend SPY/QQQ  (15 variants)
+  chosen on train: rsi-dip SPY rsi25
+  train -1.17% dd 1.29% trades 2 | median variant on train +0.00%
+  TEST  -0.42% vs hold -5.62% dd 0.7% trades 4 win 50%
+  full  -1.59% vs hold -11.26% dd 1.77% trades 6
+
+pullback-in-uptrend AAPL/MSFT/NVDA/GOOGL/AMZN/META  (15 variants)
+  chosen on train: pullback AAPL dip2 trend120 sl3
+  train +0.10% dd 1.26% trades 2 | median variant on train -2.22%
+  TEST  -0.08% vs hold -9.12% dd 0.31% trades 2 win 50%
+  full  +0.51% vs hold -13.99% dd 1.26% trades 6
+
+crypto-trend-long BTC/ETH  (12 variants)
+  chosen on train: trend-long crypto sma48 band1.5 sl4
+  train -1.70% dd 1.76% trades 5 | median variant on train -3.77%
+  TEST  -0.52% vs hold -25.44% dd 0.52% trades 1 win 0%
+  full  -2.21% vs hold -30.45% dd 2.27% trades 6
+
+crypto-trend-short BTC/ETH  (12 variants)
+  chosen on train: trend-short crypto sma72 band1.5 sl4
+  train -0.27% dd 2.02% trades 4 | median variant on train -1.47%
+  TEST  +7.82% vs hold -25.44% dd 3.89% trades 8 win 25%
+  full  +7.57% vs hold -30.45% dd 3.89% trades 12
+
+control: crypto dip-buying BTC/ETH  (3 variants)
+  chosen on train: crypto-dip 3
+  train +1.11% dd 1.59% trades 4 | median variant on train +0.52%
+  TEST  -11.88% vs hold -25.44% dd 11.88% trades 16 win 12.5%
+  full  -10.85% vs hold -30.45% dd 12.22% trades 20
+
+breakout high-beta TSLA/PLTR/COIN/MSTR/AMD  (12 variants)
+  chosen on train: breakout brk3 exit24 sl6
+  train -3.31% dd 4.5% trades 11 | median variant on train -3.89%
+  TEST  -1.94% vs hold -14.60% dd 3.33% trades 11 win 27.27%
+  full  -5.19% vs hold -26.92% dd 6.36% trades 22
+
+[{"family":"pullback-in-uptrend SPY/QQQ","strategy":{"summary":"rsi-dip SPY rsi25","side":"long","exitConditions":[{"type":"price_vs_sma","description":"0% above 24h average","periodHours":24,"op":"above","bandPct":0}],"stopLossPct":4,"takeProfitPct":0,"maxHoldHours":120,"positionPct":20,"maxOpenPositions":3,"leverage":1,"notes":[],"name":"rsi-dip SPY rsi25","symbols":["SPY","QQQ"],"entry":[{"type":"rsi","description":"RSI(14h) below 25","periodHours":14,"op":"lt","value":25},{"type":"price_vs_sma","description":"0% above 120h average","periodHours":120,"op":"above","bandPct":0}]},"test":{"returnPct":-0.42,"benchmark":-5.62,"dd":0.7,"trades":4}},{"family":"pullback-in-uptrend AAPL/MSFT/NVDA/GOOGL/AMZN/META","strategy":{"summary":"pullback AAPL dip2 trend120 sl3","side":"long","exitConditions":[{"type":"price_vs_sma","description":"0% above 24h average","periodHours":24,"op":"above","bandPct":0}],"stopLossPct":3,"takeProfitPct":0,"maxHoldHours":120,"positionPct":20,"maxOpenPositions":3,"leverage":1,"notes":[],"name":"pullback AAPL dip2 trend120 sl3","symbols":["AAPL","MSFT","NVDA","GOOGL","AMZN","META"],"entry":[{"type":"price_vs_sma","description":"2% below 24h average","periodHours":24,"op":"below","bandPct":2},{"type":"price_vs_sma","description":"0% above 120h average","periodHours":120,"op":"above","bandPct":0}]},"test":{"returnPct":-0.08,"benchmark":-9.12,"dd":0.31,"trades":2}},{"family":"crypto-trend-long BTC/ETH","strategy":{"summary":"trend-long crypto sma48 band1.5 sl4","side":"long","exitConditions":[{"type":"price_vs_sma","description":"0% below 48h average","periodHours":48,"op":"below","bandPct":0}],"stopLossPct":4,"takeProfitPct":0,"maxHoldHours":0,"positionPct":25,"maxOpenPositions":2,"leverage":1,"notes":[],"name":"trend-long crypto sma48 band1.5 sl4","symbols":["BTC","ETH"],"entry":[{"type":"price_vs_sma","description":"1.5% above 48h average","periodHours":48,"op":"above","bandPct":1.5},{"type":"change_pct","description":"up more than 0% over 24h","lookbackHours":24,"op":"gt","value":0}]},"test":{"returnPct":-0.52,"benchmark":-25.44,"dd":0.52,"trades":1}},{"family":"crypto-trend-short BTC/ETH","strategy":{"summary":"trend-short crypto sma72 band1.5 sl4","side":"short","exitConditions":[{"type":"price_vs_sma","description":"0% above 72h average","periodHours":72,"op":"above","bandPct":0}],"stopLossPct":4,"takeProfitPct":0,"maxHoldHours":0,"positionPct":25,"maxOpenPositions":2,"leverage":1,"notes":[],"name":"trend-short crypto sma72 band1.5 sl4","symbols":["BTC","ETH"],"entry":[{"type":"price_vs_sma","description":"1.5% below 72h average","periodHours":72,"op":"below","bandPct":1.5},{"type":"change_pct","description":"down more than 0% over 24h","lookbackHours":24,"op":"lt","value":0}]},"test":{"returnPct":7.82,"benchmark":-25.44,"dd":3.89,"trades":8}},{"family":"control: crypto dip-buying BTC/ETH","strategy":{"summary":"crypto-dip 3","side":"long","exitConditions":[],"stopLossPct":3,"takeProfitPct":3,"maxHoldHours":0,"positionPct":25,"maxOpenPositions":2,"leverage":1,"notes":[],"name":"crypto-dip 3","symbols":["BTC","ETH"],"entry":[{"type":"change_pct","description":"down more than 3% over 24h","lookbackHours":24,"op":"lt","value":-3}]},"test":{"returnPct":-11.88,"benchmark":-25.44,"dd":11.88,"trades":16}},{"family":"breakout high-beta TSLA/PLTR/COIN/MSTR/AMD","strategy":{"summary":"breakout brk3 exit24 sl6","side":"long","exitConditions":[{"type":"price_vs_sma","description":"0% below 24h average","periodHours":24,"op":"below","bandPct":0}],"stopLossPct":6,"takeProfitPct":0,"maxHoldHours":0,"positionPct":15,"maxOpenPositions":3,"leverage":1,"notes":[],"name":"breakout brk3 exit24 sl6","symbols":["TSLA","PLTR","COIN","MSTR","AMD"],"entry":[{"type":"price_vs_sma","description":"3% above 48h average","periodHours":48,"op":"above","bandPct":3},{"type":"change_pct","description":"up more than 2% over 24h","lookbackHours":24,"op":"gt","value":2}]},"test":{"returnPct":-1.94,"benchmark":-14.6,"dd":3.33,"trades":11}}]
