@@ -1,7 +1,7 @@
 # Hyalis
 
 [![CI](https://github.com/hyalisxyz/hyalis/actions/workflows/ci.yml/badge.svg)](https://github.com/hyalisxyz/hyalis/actions/workflows/ci.yml)
-[![Security review](https://img.shields.io/badge/security-self--review%20%C2%B7%20Slither-2533e6)](AUDIT.md)
+[![Security review](https://img.shields.io/badge/security-Slither%20%C2%B7%20Mythril%20%C2%B7%20fuzzing-2533e6)](AUDIT.md)
 [![License](https://img.shields.io/badge/license-BUSL--1.1%20%C2%B7%20contracts%20MIT-2533e6)](LICENSE)
 [![Website](https://img.shields.io/badge/web-hyalis.xyz-2533e6)](https://hyalis.xyz)
 

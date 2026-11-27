@@ -5,14 +5,15 @@
 | Area | Tool | Result |
 |---|---|---|
 | Smart contracts | [Slither](https://github.com/crytic/slither) 0.11.6, 102 detectors, solc 0.8.28 | 42 findings on 11 contracts: **none exploitable** after triage (details below) |
+| Smart contracts | [Mythril](https://github.com/Consensys/mythril) symbolic execution, 300 s per contract, official solc 0.8.28 | **No issues detected** in AgentVault, AgentVaultFactory, UniswapV3Adapter and ReceiptRegistry |
 | Vault behaviour | Foundry fuzzing: 5 invariants, each over 256 runs of 500 random actions (640,000 calls), plus 7 fuzzed and unit properties | All hold. Fuzzing found one dust-sized edge case, described below as a Low finding |
 | Source verification | [Sourcify](https://sourcify.dev), all five deployments | **Verified**: both the creation and the runtime bytecode match this source (links in [Scope](#scope)) |
 | Deployed code | Bytecode comparison across chains | Robinhood Chain and Arbitrum One run **byte-identical** code, apart from each chain's token and router addresses |
 | Dependencies | `npm audit` (server, website, dev tools) | **0** known vulnerabilities |
-| Secrets | Pattern scan of every commit in this repository | **0** real secrets. The only matches are public examples: AWS's documented sample key, Anvil's published test keys, and fake strings in tests |
+| Secrets | [gitleaks](https://github.com/gitleaks/gitleaks) over the full history, plus our own pattern scan | **No leaks detected**. Our scan's only matches are public examples: AWS's documented sample key, Anvil's published test keys, and fake strings in tests |
 | Behaviour | 137 unit tests, 10 fork tests on copies of mainnet | All pass (see [Tests](#tests)) |
 
-The raw Slither output is in [`docs/audit/slither-2026-11-28.txt`](docs/audit/slither-2026-11-28.txt).
+The raw Slither output is in [`docs/audit/slither-2026-11-28.txt`](docs/audit/slither-2026-11-28.txt). Every check in this table also runs in [CI](https://github.com/hyalisxyz/hyalis/actions/workflows/ci.yml) on every change to `main`: Slither, Mythril, the fuzz and invariant tests, gitleaks and the unit tests. Their full logs are public. We also wanted to run Aderyn, but it has been retired and its downloads withdrawn.
 
 ## Scope
 
