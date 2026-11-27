@@ -65,26 +65,23 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  aderyn:
-    name: Aderyn (contracts)
+  mythril:
+    name: Mythril (contracts, symbolic execution)
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: contracts
     steps:
       - uses: actions/checkout@v5
-      - uses: foundry-rs/foundry-toolchain@v1
-      - run: forge install foundry-rs/forge-std@v1.9.7 --no-git
-      - name: Install Aderyn
-        run: curl --proto '=https' --tlsv1.2 -LsSf https://github.com/cyfrin/aderyn/releases/latest/download/aderyn-installer.sh | bash
-      - name: Run Aderyn
+      - name: Analyze each contract
         run: |
-          export PATH="$HOME/.cargo/bin:$HOME/.aderyn/bin:$PATH"
-          aderyn --version
-          aderyn . -x test -o aderyn-report.md
-          cat aderyn-report.md
+          mkdir -p mythril
+          for c in src/vault/AgentVault.sol:AgentVault src/vault/AgentVaultFactory.sol:AgentVaultFactory src/vault/adapters/UniswapV3Adapter.sol:UniswapV3Adapter src/ReceiptRegistry.sol:ReceiptRegistry; do
+            name="${c##*:}"
+            echo "::group::$name"
+            docker run --rm -v "$PWD/contracts:/src" -w /src mythril/myth analyze "$c" --solv 0.8.28 --execution-timeout 300 -o markdown > "mythril/$name.md" 2>&1 || true
+            cat "mythril/$name.md"
+            echo "::endgroup::"
+          done
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: aderyn-report
-          path: contracts/aderyn-report.md
+          name: mythril-report
+          path: mythril/
