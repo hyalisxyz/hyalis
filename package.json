@@ -1,6 +1,7 @@
 {
   "name": "agent-utility",
   "version": "0.1.0",
+  "license": "BUSL-1.1",
   "private": true,
   "type": "module",
   "description": "Agent backend: LLM strategy brain, policy guardrails, price gate, paper broker and verifiable decision receipts on Robinhood Chain.",

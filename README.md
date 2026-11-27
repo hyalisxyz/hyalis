@@ -1,8 +1,10 @@
-# Hyalis: phase 1 backend
+# Hyalis
 
-AI trading agents for tokenized stocks on Robinhood Chain. In this phase they paper trade only. Every decision is recorded with the exact Chainlink round it used, and the records are sealed under a Merkle root each epoch, so anyone can check them.
+AI trading agents that show their receipts. You describe a strategy in plain language; an agent turns it into checked rules and trades tokenized stocks and crypto, on paper or with real money from your own vault. Every decision is recorded with the exact price round it used, and the records are sealed under a Merkle root every hour and anchored on Robinhood Chain, so anyone can check them.
 
-One Node service does everything: price ingest, strategy brain, guardrails, paper broker, receipts, and the API.
+Website: [hyalis.xyz](https://hyalis.xyz) · X: [@hyalisAI](https://x.com/hyalisAI)
+
+One Node service does everything: price ingest, strategy brain, guardrails, paper broker, the real-money trader, receipts, and the API. The website (`web/`) is served by the same service.
 
 ## How a decision is made
 
@@ -21,6 +23,7 @@ Plankton marks/halts (optional) ──────────────┘   
 - **Gate** (`src/guard/gate.ts`): fails closed. It blocks on a halt, a missing, bad, future, or stale price, or a second source more than 150 bps away.
 - **Policy** (`src/guard/policy.ts`): owner limits. Max leverage (platform cap 3x), position size, open positions, daily loss stop, shorting on or off, and the symbol list.
 - **Paper broker** (`src/paper`): isolated margin. Spot is long at 1x; short or above 1x is a perp. Includes fees and liquidation at 90% margin loss.
+- **Real-money trader** (`src/live`): the same decisions become swaps on Uniswap V3, from a house agent's own wallet or a user's vault (see below).
 - **Receipts** (`src/receipts`, `src/engine/epochs.ts`): canonical JSON, domain-separated Merkle tree, one root per epoch, each root linked to the one before it.
 
 ## Run
@@ -86,6 +89,26 @@ Signed in (`Authorization: Bearer <session>`):
 
 The admin token (`ADMIN_TOKEN`) can do the same for house agents (no owner, no quota). Every POST is rate limited per IP.
 
+## Real money: users' vaults
+
+A user trades with an agent from their own **AgentVault** (`contracts/src/vault`). One transaction makes the vault and puts ETH or the chain's stablecoin in it. Only the owner can withdraw. The Hyalis executor can only swap between the tokens the vault allows, through the adapter the vault allows, within limits the vault itself enforces (trade size, daily volume, and a floor below the Chainlink price), and hand everything back to the owner.
+
+| Chain | Markets | Cash | Factory | Adapter |
+|---|---|---|---|---|
+| Robinhood Chain (4663) | tokenized stocks with a Chainlink feed, ETH | USDG | `0xeafa7d3b763cfa8d4509907263072722910631cf` | `0x88781501b8ca8a04c4ce287ccc4e20fb8996aa45` |
+| Arbitrum One (42161) | BTC, ARB, LINK, UNI, AAVE | USDC | `0x8c4730f9fed980132eb6a8a681ceb558870de41a` | `0x242be6fe51aaa67a9bac7592b755def337a416fb` |
+
+A market trades on Robinhood Chain when it has a token there, else on Arbitrum One. Receipts for every chain are sealed and anchored on Robinhood Chain; each fill names the chain and transaction it ran on.
+
+- The trader (`src/live/live.ts`) works per chain ("venue"): its own client, Uniswap router and quoter, cash token and adapter. Thin pairs are also quoted through WETH (two pools), and the better route is used.
+- Before anything is signed: the quote must be within `LIVE_MAX_GAP_BPS` of the oracle, every swap carries a minimum output and a deadline, and a router is approved for exactly the amount sold.
+- A run can end by time, profit target or loss limit, checked every 5 seconds at executable prices, or by the owner's Stop. The position is sold and everything goes back to the owner; ETH deposited comes back as ETH.
+- During the beta a vault may hold at most `VAULT_MAX_DEPOSIT_USD`. The vault contracts are not audited yet.
+
+```bash
+npm run test:fork    # end to end on local forks of Robinhood Chain and Arbitrum One (needs anvil and archive RPCs)
+```
+
 ## Backtest
 
 `src/engine/backtest.ts` replays a strategy once per market hour through `step()`, the same function live agents use. A test checks that a backtest and a live agent produce identical fills on the same data, and another checks that no decision sees a round published after it. It reports return, the equal-weight buy-and-hold benchmark, max drawdown, trades, win rate, exposure, fees, and why orders were blocked. Because decisions are hourly, a stop can fill past its level when the price gaps within the hour; the result lists this and other caveats.
@@ -139,7 +162,7 @@ The chain holds only each epoch's root. So that the receipts behind it can never
   ```
 
   It rebuilds the root from the receipts and checks root, previous root and leaf count against the ReceiptRegistry on Robinhood Chain.
-- The service backs up to a Railway bucket in another region (`src/archive/`): every anchored epoch as `epochs/<epoch>.json` (once), and every `BACKUP_EVERY_HOURS` a consistent gzipped database copy as `db/latest.db.gz`, `db/day-<0-6>.db.gz` and `db/month-YYYY-MM.db.gz`, with `db/latest.json` (hash, counts) written last. Only where `BACKUP_ENABLED=true`, so a laptop with the credentials never uploads over production. On Railway the `BACKUP_S3_*` variables reference the bucket (`${{agent-backups.ENDPOINT}}` and so on).
+- The service backs up to an S3-compatible bucket in another region (`src/archive/`): every anchored epoch as `epochs/<epoch>.json` (once), and every `BACKUP_EVERY_HOURS` a consistent gzipped database copy as `db/latest.db.gz`, `db/day-<0-6>.db.gz` and `db/month-YYYY-MM.db.gz`, with `db/latest.json` (hash, counts) written last. Only where `BACKUP_ENABLED=true`, so a laptop with the credentials never uploads over production.
 - Restore checks the manifest hash, SQLite's integrity check and every epoch root before it writes anything:
 
   ```bash
@@ -159,15 +182,14 @@ node scripts/new-media-wallet.ts   # creates MEDIA_PAYER_KEY in .env and prints 
 
 Off until `MEDIA_PAYER_KEY`, `MEDIA_API`, `MEDIA_MODEL` and `MEDIA_PAY_TO` are all set. At 0.000735 USDG a 512x512 image (2026-11-24), 1 USDG pays for about 1,300 avatars.
 
-## Deployment (Railway)
+## Deployment
 
-Built from the `Dockerfile` (Node 26.13.1, same as development) on every push to `main` of the private GitHub repo. One service with a volume at `/data` for the SQLite database (`DB_PATH=/data/agent-utility.db`), health check `/health`, and deploy overlap 0, so two instances never write the database or publish roots at the same time.
+Built from the `Dockerfile` (Node 26) and run as one container with a volume for the SQLite database, health check `/health`. One instance only, so two never write the database or publish roots at the same time. `scripts/deploy-vps.sh` builds the current commit on the server and swaps the container once the health check passes.
 
-- Secrets (`ANTHROPIC_API_KEY`, `ADMIN_TOKEN`, `PYTH_API_KEY`, `ANCHOR_PRIVATE_KEY`, and `RPC_URL` / `MEDIA_PAYER_KEY` when set) are copied from the local `.env` with `node scripts/push-secrets.ts` and checked with `node scripts/check-secrets.ts`; neither prints a value.
-- `RPC_URL` (an Alchemy endpoint) is tried before the public RPCs; it also serves as the fork source for `npm run test:fork`.
-- Anchoring runs on Railway only. Keep `REGISTRY_ADDRESS` unset locally, or two databases would publish to the same registry and anchoring would stop on the conflict.
+- Secrets stay in the server's own `.env`, never in the repository. `node scripts/check-secrets.ts` checks they are set without printing them.
+- `RPC_URL` and `ARB_RPC_URL` (archive endpoints) are tried before the public RPCs; they are also the fork sources for `npm run test:fork`.
+- Anchoring runs in production only. Keep `REGISTRY_ADDRESS` unset locally, or two databases would publish to the same registry and anchoring would stop on the conflict.
 - `node scripts/smoke-prod.ts https://<domain>` checks the wallet view and an AI dry run against the live service.
-- At token launch: set `TOKEN_ADDRESS` on the Railway service (and `APP_DOMAIN` to the website's domain). Changing a variable redeploys.
 
 ## Verify a receipt yourself
 
@@ -183,18 +205,20 @@ The verifier checks that the leaf is the hash of the record, that the leaf sits 
 - `data/markets.json` comes from Chainlink's public feed directory (`npm run sync-markets`).
 - Plankton's public API is read-only here, used as a second price and for halts. Most of its markets are small caps without a Chainlink feed, so the overlap is small for now.
 
-## Known gaps (phase 1)
+## Known gaps
 
-- Paper only: no vault, no on-chain orders, no funding on perps.
+- The vault contracts are not audited yet; deposits are capped during the beta.
+- Real money is spot and long only; shorting and leverage are paper only.
 - A receipt records the latest round and the range of rounds behind its hourly closes. The verifier checks the latest round on chain; recomputing every indicator from chain is not built yet.
-- The brain needs `ANTHROPIC_API_KEY`. Agents can also be created from rules directly.
+- The brain needs an LLM API key. Agents can also be created from rules directly.
 - The exchange calendar (`src/market/calendar.ts`) covers 2026–2027. Later years are treated as closed until the table is extended, so nothing trades on a guessed calendar.
-- Only one price source is fully wired (Chainlink). Plankton is optional and often slow; a second independent source (Pyth with an API key, or on-chain pool prices) is still open.
 
 ## Market hours
 
 The Chainlink equity feeds update 24/5, from Sunday 20:00 to Friday 20:00 New York time, with no updates on Saturday. This was measured from the stored rounds, not assumed. While the market is closed, the engine makes no decisions and no fills, and only writes the hourly snapshot. Indicator windows count market hours only, so "24 hours" always means one trading day, and a Monday-morning window never compares against a frozen weekend price. NYSE holidays close the overnight session before them, and early-close days close at 13:00.
 
-## Network note
+## License
 
-From some ISPs, every `robinhood.com` domain (the official RPC, docs and APIs) resolves to a block page. The service uses the public RPC mirrors first for that reason. A server hosted abroad is not affected.
+Hyalis is source-available under the [Business Source License 1.1](LICENSE): you may read, copy, modify and run it for non-production use, and verify Hyalis receipts with it in any setting. Running it as a competing production service needs a commercial license until the Change Date (2030-11-28), when it becomes available under GPL-2.0-or-later.
+
+The smart contracts in `contracts/` are MIT licensed (see their SPDX headers), so the code that holds users' funds can be read, verified on chain and reused freely.
