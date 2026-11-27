@@ -70,16 +70,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+      - name: Solidity 0.8.28 from the official release
+        run: |
+          curl -fsSL -o solc https://github.com/ethereum/solidity/releases/download/v0.8.28/solc-static-linux
+          chmod +x solc && ./solc --version
       - name: Analyze each contract
         run: |
           mkdir -p mythril
+          failed=0
           for c in src/vault/AgentVault.sol:AgentVault src/vault/AgentVaultFactory.sol:AgentVaultFactory src/vault/adapters/UniswapV3Adapter.sol:UniswapV3Adapter src/ReceiptRegistry.sol:ReceiptRegistry; do
             name="${c##*:}"
             echo "::group::$name"
-            docker run --rm -v "$PWD/contracts:/src" -w /src mythril/myth analyze "$c" --solv 0.8.28 --execution-timeout 300 -o markdown > "mythril/$name.md" 2>&1 || true
+            docker run --rm -v "$PWD/contracts:/src" -v "$PWD/solc:/root/.solcx/solc-v0.8.28" -w /src mythril/myth               analyze "$c" --solv 0.8.28 --execution-timeout 300 -o markdown > "mythril/$name.md" 2>&1 || true
             cat "mythril/$name.md"
             echo "::endgroup::"
+            # Findings are reported, not fatal; a run that could not analyze is.
+            if grep -qE "Traceback|\[ERROR\]|Solc experienced a fatal error" "mythril/$name.md"; then echo "::error::Mythril could not analyze $name"; failed=1; fi
           done
+          exit $failed
       - uses: actions/upload-artifact@v4
         if: always()
         with:
