@@ -9,3 +9,4 @@ contracts/cache/
 web/dist/
 data/identity-journal.json
 data/migration/
+contracts/lib/

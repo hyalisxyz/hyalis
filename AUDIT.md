@@ -5,6 +5,8 @@
 | Area | Tool | Result |
 |---|---|---|
 | Smart contracts | [Slither](https://github.com/crytic/slither) 0.11.6, 102 detectors, solc 0.8.28 | 42 findings on 11 contracts: **none exploitable** after triage (details below) |
+| Vault behaviour | Foundry fuzzing: 5 invariants, each over 256 runs of 500 random actions (640,000 calls), plus 7 fuzzed and unit properties | All hold. Fuzzing found one dust-sized edge case, described below as a Low finding |
+| Source verification | [Sourcify](https://sourcify.dev), all five deployments | **Verified**: both the creation and the runtime bytecode match this source (links in [Scope](#scope)) |
 | Deployed code | Bytecode comparison across chains | Robinhood Chain and Arbitrum One run **byte-identical** code, apart from each chain's token and router addresses |
 | Dependencies | `npm audit` (server, website, dev tools) | **0** known vulnerabilities |
 | Secrets | Pattern scan of every commit in this repository | **0** real secrets. The only matches are public examples: AWS's documented sample key, Anvil's published test keys, and fake strings in tests |
@@ -23,6 +25,18 @@ The raw Slither output is in [`docs/audit/slither-2026-11-28.txt`](docs/audit/sl
 | `contracts/src/vault/Interfaces.sol` | Interfaces and a minimal SafeERC20 | (library code) |
 
 The test mocks in `contracts/test/` were left out of the review.
+
+Each deployment's source is verified on Sourcify, and anyone can download it from there:
+
+- Robinhood Chain:
+  - [AgentVaultFactory](https://repo.sourcify.dev/4663/0xeafa7d3b763cfa8d4509907263072722910631cf)
+  - [UniswapV3Adapter](https://repo.sourcify.dev/4663/0x88781501b8ca8a04c4ce287ccc4e20fb8996aa45)
+  - [ReceiptRegistry](https://repo.sourcify.dev/4663/0x8c4730f9fed980132eb6a8a681ceb558870de41a)
+- Arbitrum One:
+  - [AgentVaultFactory](https://repo.sourcify.dev/42161/0x8c4730f9fed980132eb6a8a681ceb558870de41a)
+  - [UniswapV3Adapter](https://repo.sourcify.dev/42161/0x242be6fe51aaa67a9bac7592b755def337a416fb)
+
+Vaults are created by a verified factory, so their code is part of the factory's verified source.
 
 ### The deployed code is this code
 
@@ -43,7 +57,16 @@ Severity and confidence are Slither's own ratings. "Accepted" means the behaviou
 
 ### Medium: divide-before-multiply (1), Accepted
 
-In `_checkAndBook`, the minimum output is `((valueIn * 10^dec) / price) * (10000 - slippage) / 10000`. Dividing first can round the minimum down by less than one base unit of the output token (for example 1e-18 of a token). That is far below any price movement, and the oracle floor still applies.
+In `_checkAndBook`, the minimum output is `((valueIn * 10^dec) / price) * (10000 - slippage) / 10000`. Dividing first can round the minimum down by up to one base unit of the output token (for example 1e-18 of a token, or $0.000001 of USDC). That is far below any price movement, and the oracle floor still applies. The one case where this rounding matters is the dust case below.
+
+### Low: a swap worth less than two base units of the output token has no floor (found by fuzzing)
+
+The invariant tests found it. When a swap is so small that its oracle floor rounds down to 0, which happens when it is worth less than two base units of the output token, the vault accepts any output for it. A hostile venue could then keep that input.
+
+- **Size:** at most two base units of the output token. For USDC that is under $0.000002; for WETH it is a few wei. The test reproduces it with 6 wei of WETH (about 1e-14 USD).
+- **Preconditions:** the executor would have to send such a swap, and the owner would have to have allowed a hostile venue. Vaults made by Hyalis allow only the Uniswap V3 adapter, which routes through Uniswap's router. The backend never sends an order under $1.
+- **Fix for the next vault version:** refuse a swap whose floor is 0. The deployed vaults are immutable, so the fix applies to new deployments.
+- **Pinned by a test:** `test_knownLimit_dustSwapHasNoFloor`. The invariants check that a thief can only ever hold such dust.
 
 ### Medium: incorrect-equality (5), False positive
 
@@ -90,6 +113,21 @@ These are not bugs. They are the limits a user relies on, stated plainly.
 
 ## Tests
 
+- **Fuzz and invariant tests** (`contracts/test/VaultInvariants.t.sol`, run with `forge test`). A vault holds three tokens with live-like price feeds. A handler then performs random sequences of these actions:
+  - swaps through a venue that is honest, underpays, steals the approved input, over-pulls, or pays a thief;
+  - price moves of up to 30%, and time passing;
+  - strangers trying to withdraw or swap;
+  - Stop, which returns everything to the owner;
+  - the owner depositing again.
+
+  After every sequence these must hold:
+  1. Nobody but the owner ever holds the vault's funds. A thief can hold at most the dust above.
+  2. Every successful swap paid at least the oracle price less the slippage allowance, through an honest venue.
+  3. Strangers can never move funds.
+  4. The day's volume never exceeds the owner's daily limit.
+  5. No allowance is ever left behind for a venue.
+
+  Fuzzed single properties: only the owner withdraws, even while paused; only the executor swaps; the slippage cap cannot be raised; trades over the limit are refused; a stale price stops trading.
 - **137 unit tests** (`npm test`): strategy engine, guards and policy, receipts and Merkle proofs against the registry on a local chain, token tiers, security headers and redaction, and more.
 - **10 fork tests** (`npm run test:fork`), run on local copies of mainnet with real pools, feeds and tokens:
   - Robinhood Chain:
@@ -106,6 +144,7 @@ These are not bugs. They are the limits a user relies on, stated plainly.
 ```bash
 pip install slither-analyzer          # Python 3.12 or 3.13
 cd contracts && slither . --filter-paths "test/"
+forge install foundry-rs/forge-std@v1.9.7 --no-git && forge test   # fuzz and invariant tests
 npm audit && (cd web && npm audit)
 npm test
 npm run test:fork                     # needs anvil, plus RPC_URL and ARB_RPC_URL (archive nodes)
