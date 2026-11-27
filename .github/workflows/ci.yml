@@ -81,7 +81,7 @@ jobs:
           for c in src/vault/AgentVault.sol:AgentVault src/vault/AgentVaultFactory.sol:AgentVaultFactory src/vault/adapters/UniswapV3Adapter.sol:UniswapV3Adapter src/ReceiptRegistry.sol:ReceiptRegistry; do
             name="${c##*:}"
             echo "::group::$name"
-            docker run --rm -v "$PWD/contracts:/src" -v "$PWD/solc:/root/.solcx/solc-v0.8.28" -w /src mythril/myth               analyze "$c" --solv 0.8.28 --execution-timeout 300 -o markdown > "mythril/$name.md" 2>&1 || true
+            docker run --rm -v "$PWD/contracts:/src" -v "$PWD/solc:/usr/bin/solc:ro" -v "$PWD/solc:/usr/local/bin/solc:ro" -w /src --entrypoint myth mythril/myth               analyze "$c" --execution-timeout 300 -o markdown > "mythril/$name.md" 2>&1 || true
             cat "mythril/$name.md"
             echo "::endgroup::"
             # Findings are reported, not fatal; a run that could not analyze is.
