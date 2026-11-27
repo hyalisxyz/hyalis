@@ -1,0 +1,144 @@
+
+Detector: reentrancy-balance
+Reentrancy in AgentVault._execute(address,address,address,uint256,uint256,bytes) (src/vault/AgentVault.sol#257-272):
+	External call allowing reentrancy:
+	- tokenIn.forceApprove(adapter,amountIn) (src/vault/AgentVault.sol#263)
+	Balance read before the call:
+	- inBefore = IERC20(tokenIn).balanceOf(address(this)) (src/vault/AgentVault.sol#262)
+	Possible stale balance used after the call in a condition:
+	- spent > amountIn (src/vault/AgentVault.sol#269)
+		- stale variable `spent`
+Reentrancy in AgentVault._execute(address,address,address,uint256,uint256,bytes) (src/vault/AgentVault.sol#257-272):
+	External call allowing reentrancy:
+	- tokenIn.forceApprove(adapter,amountIn) (src/vault/AgentVault.sol#263)
+	Balance read before the call:
+	- outBefore = IERC20(tokenOut).balanceOf(address(this)) (src/vault/AgentVault.sol#263)
+	Possible stale balance used after the call in a condition:
+	- amountOut < required (src/vault/AgentVault.sol#271)
+		- stale variable `amountOut`
+Reentrancy in AgentVault._execute(address,address,address,uint256,uint256,bytes) (src/vault/AgentVault.sol#257-272):
+	External call allowing reentrancy:
+	- IVenueAdapter(adapter).swap(tokenIn,tokenOut,amountIn,required,address(this),data) (src/vault/AgentVault.sol#263-267)
+	Balance read before the call:
+	- inBefore = IERC20(tokenIn).balanceOf(address(this)) (src/vault/AgentVault.sol#262)
+	Possible stale balance used after the call in a condition:
+	- spent > amountIn (src/vault/AgentVault.sol#269)
+		- stale variable `spent`
+Reentrancy in AgentVault._execute(address,address,address,uint256,uint256,bytes) (src/vault/AgentVault.sol#257-272):
+	External call allowing reentrancy:
+	- IVenueAdapter(adapter).swap(tokenIn,tokenOut,amountIn,required,address(this),data) (src/vault/AgentVault.sol#263-267)
+	Balance read before the call:
+	- outBefore = IERC20(tokenOut).balanceOf(address(this)) (src/vault/AgentVault.sol#263)
+	Possible stale balance used after the call in a condition:
+	- amountOut < required (src/vault/AgentVault.sol#271)
+		- stale variable `amountOut`
+Reentrancy in AgentVault._execute(address,address,address,uint256,uint256,bytes) (src/vault/AgentVault.sol#257-272):
+	External call allowing reentrancy:
+	- tokenIn.forceApprove(adapter,0) (src/vault/AgentVault.sol#267)
+	Balance read before the call:
+	- inBefore = IERC20(tokenIn).balanceOf(address(this)) (src/vault/AgentVault.sol#262)
+	Possible stale balance used after the call in a condition:
+	- spent > amountIn (src/vault/AgentVault.sol#269)
+		- stale variable `spent`
+Reentrancy in AgentVault._execute(address,address,address,uint256,uint256,bytes) (src/vault/AgentVault.sol#257-272):
+	External call allowing reentrancy:
+	- tokenIn.forceApprove(adapter,0) (src/vault/AgentVault.sol#267)
+	Balance read before the call:
+	- outBefore = IERC20(tokenOut).balanceOf(address(this)) (src/vault/AgentVault.sol#263)
+	Possible stale balance used after the call in a condition:
+	- amountOut < required (src/vault/AgentVault.sol#271)
+		- stale variable `amountOut`
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities
+
+Detector: divide-before-multiply
+AgentVault._checkAndBook(address,address,uint256,uint256) (src/vault/AgentVault.sol#237-254) performs a multiplication on the result of a division:
+	- floor = (((valueIn * 10 ** decOut) / priceOut) * (10_000 - p.maxSlippageBps)) / 10_000 (src/vault/AgentVault.sol#252-253)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#divide-before-multiply
+
+Detector: incorrect-equality
+ReceiptRegistry.verifyLeaf(uint64,bytes32,bytes32[]) (src/ReceiptRegistry.sol#82-91) uses a dangerous strict equality:
+	- root == bytes32(0) (src/ReceiptRegistry.sol#84)
+ReceiptRegistry.verifyLeaf(uint64,bytes32,bytes32[]) (src/ReceiptRegistry.sol#82-91) uses a dangerous strict equality:
+	- h == root (src/ReceiptRegistry.sol#90)
+AgentVault._checkAndBook(address,address,uint256,uint256) (src/vault/AgentVault.sol#237-254) uses a dangerous strict equality:
+	- today == day (src/vault/AgentVault.sol#248-249)
+AgentVault.returnToOwner(address[]) (src/vault/AgentVault.sol#177-192) uses a dangerous strict equality:
+	- b == 0 (src/vault/AgentVault.sol#181)
+AgentVaultFactory.applyFeed(address) (src/vault/AgentVaultFactory.sol#103-113) uses a dangerous strict equality:
+	- since == 0 (src/vault/AgentVaultFactory.sol#107)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#dangerous-strict-equalities
+
+Detector: uninitialized-local
+UniswapV3Adapter.swap(address,address,uint256,uint256,address,bytes).path (src/vault/adapters/UniswapV3Adapter.sol#43) is a local variable never initialized
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#uninitialized-local-variables
+
+Detector: unused-return
+AgentVault.constructor(address,address,IFeedSource,address,address,AgentVault.Policy,address[],address[]) (src/vault/AgentVault.sol#103-131) ignores return value by (feed,None) = feeds_.feedOf(tokens_[i]) (src/vault/AgentVault.sol#123-124)
+AgentVault.setTokens(address[],bool) (src/vault/AgentVault.sol#141-152) ignores return value by (feed,None) = feeds.feedOf(tokens[i]) (src/vault/AgentVault.sol#148)
+AgentVault._execute(address,address,address,uint256,uint256,bytes) (src/vault/AgentVault.sol#257-272) ignores return value by IVenueAdapter(adapter).swap(tokenIn,tokenOut,amountIn,required,address(this),data) (src/vault/AgentVault.sol#263-267)
+AgentVault._price(address) (src/vault/AgentVault.sol#282-295) ignores return value by (None,answer,None,updatedAt,None) = IAggregatorV3(feed).latestRoundData() (src/vault/AgentVault.sol#288-289)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unused-return
+
+Detector: missing-zero-check
+AgentVault.constructor(address,address,IFeedSource,address,address,AgentVault.Policy,address[],address[]).weth_ (src/vault/AgentVault.sol#106) lacks a zero-check on :
+		- weth = weth_ (src/vault/AgentVault.sol#115)
+AgentVault.constructor(address,address,IFeedSource,address,address,AgentVault.Policy,address[],address[]).executor_ (src/vault/AgentVault.sol#104) lacks a zero-check on :
+		- executor = executor_ (src/vault/AgentVault.sol#115-116)
+AgentVault.setExecutor(address).executor_ (src/vault/AgentVault.sol#133-134) lacks a zero-check on :
+		- executor = executor_ (src/vault/AgentVault.sol#137)
+AgentVaultFactory.constructor(address,address,address,address[],AgentVaultFactory.Feed[]).weth_ (src/vault/AgentVaultFactory.sol#40) lacks a zero-check on :
+		- weth = weth_ (src/vault/AgentVaultFactory.sol#42-43)
+AgentVaultFactory.setAdmin(address).admin_ (src/vault/AgentVaultFactory.sol#113-114) lacks a zero-check on :
+		- admin = admin_ (src/vault/AgentVaultFactory.sol#116-118)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-zero-address-validation
+
+Detector: calls-loop
+AgentVault.constructor(address,address,IFeedSource,address,address,AgentVault.Policy,address[],address[]) (src/vault/AgentVault.sol#103-131) has external calls inside a loop: (feed,None) = feeds_.feedOf(tokens_[i]) (src/vault/AgentVault.sol#123-124)
+AgentVault.setTokens(address[],bool) (src/vault/AgentVault.sol#141-152) has external calls inside a loop: (feed,None) = feeds.feedOf(tokens[i]) (src/vault/AgentVault.sol#148)
+AgentVault.returnToOwner(address[]) (src/vault/AgentVault.sol#177-192) has external calls inside a loop: b = IERC20(t).balanceOf(address(this)) (src/vault/AgentVault.sol#181)
+AgentVault.returnToOwner(address[]) (src/vault/AgentVault.sol#177-192) has external calls inside a loop: IWETH(weth).withdraw(b) (src/vault/AgentVault.sol#183-184)
+AgentVault.returnToOwner(address[]) (src/vault/AgentVault.sol#177-192) has external calls inside a loop: (ok,None) = owner.call{value: b}() (src/vault/AgentVault.sol#184)
+AgentVault.returnToOwner(address[]) (src/vault/AgentVault.sol#177-192) has external calls inside a loop: IWETH(weth).deposit{value: b}() (src/vault/AgentVault.sol#189)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation/#calls-inside-a-loop
+
+Detector: timestamp
+ReceiptRegistry.anchor(uint64,bytes32,bytes32,uint32) (src/ReceiptRegistry.sol#54-69) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp < (uint256(epoch) + 1) * epochSeconds (src/ReceiptRegistry.sol#57)
+ReceiptRegistry.verifyLeaf(uint64,bytes32,bytes32[]) (src/ReceiptRegistry.sol#82-91) uses timestamp for comparisons
+	Dangerous comparisons:
+	- root == bytes32(0) (src/ReceiptRegistry.sol#84)
+	- h == root (src/ReceiptRegistry.sol#90)
+AgentVault._checkAndBook(address,address,uint256,uint256) (src/vault/AgentVault.sol#237-254) uses timestamp for comparisons
+	Dangerous comparisons:
+	- today == day (src/vault/AgentVault.sol#248-249)
+AgentVault._price(address) (src/vault/AgentVault.sol#282-295) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp > updatedAt + maxAge (src/vault/AgentVault.sol#290-291)
+AgentVaultFactory.applyFeed(address) (src/vault/AgentVaultFactory.sol#103-113) uses timestamp for comparisons
+	Dangerous comparisons:
+	- since == 0 (src/vault/AgentVaultFactory.sol#107)
+	- block.timestamp < since + FEED_DELAY (src/vault/AgentVaultFactory.sol#107-108)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp
+
+Detector: low-level-calls
+Low level call in AgentVault.returnToOwner(address[]) (src/vault/AgentVault.sol#177-192):
+	- (ok,None) = owner.call{value: b}() (src/vault/AgentVault.sol#184)
+Low level call in SafeERC20._call(address,bytes) (src/vault/Interfaces.sol#40-44):
+	- (ok,ret) = token.call(data) (src/vault/Interfaces.sol#42-43)
+Low level call in SafeERC20.forceApprove(address,address,uint256) (src/vault/Interfaces.sol#55-60):
+	- (ok,ret) = token.call(abi.encodeCall(IERC20.approve,(spender,amount))) (src/vault/Interfaces.sol#56-57)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls
+
+Detector: unindexed-event-address
+Event AgentVault.ExecutorSet(address) (src/vault/AgentVault.sol#52-53) has address parameters but no indexed parameters
+Event AgentVault.TokenAllowed(address,bool) (src/vault/AgentVault.sol#55-56) has address parameters but no indexed parameters
+Event AgentVault.AdapterAllowed(address,bool) (src/vault/AgentVault.sol#57) has address parameters but no indexed parameters
+Event AgentVault.Withdrawn(address,uint256,address) (src/vault/AgentVault.sol#58-60) has address parameters but no indexed parameters
+Event AgentVault.Returned(address,uint256) (src/vault/AgentVault.sol#60) has address parameters but no indexed parameters
+Event AgentVaultFactory.AdminSet(address) (src/vault/AgentVaultFactory.sol#33-34) has address parameters but no indexed parameters
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unindexed-event-address-parameters
+. analyzed (11 contracts with 102 detectors), 42 result(s) found
+'forge clean' running (wd: F:\Agent Utility\contracts)
+'forge config --json' running
+'forge build --build-info --deny never --skip ./test/** ./script/** --force' running (wd: F:\Agent Utility\contracts)

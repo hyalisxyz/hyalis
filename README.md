@@ -1,5 +1,10 @@
 # Hyalis
 
+[![CI](https://github.com/hyalisxyz/hyalis/actions/workflows/ci.yml/badge.svg)](https://github.com/hyalisxyz/hyalis/actions/workflows/ci.yml)
+[![Security review](https://img.shields.io/badge/security-self--review%20%C2%B7%20Slither-2533e6)](AUDIT.md)
+[![License](https://img.shields.io/badge/license-BUSL--1.1%20%C2%B7%20contracts%20MIT-2533e6)](LICENSE)
+[![Website](https://img.shields.io/badge/web-hyalis.xyz-2533e6)](https://hyalis.xyz)
+
 AI trading agents that show their receipts. You describe a strategy in plain language; an agent turns it into checked rules and trades tokenized stocks and crypto, on paper or with real money from your own vault. Every decision is recorded with the exact price round it used, and the records are sealed under a Merkle root every hour and anchored on Robinhood Chain, so anyone can check them.
 
 Website: [hyalis.xyz](https://hyalis.xyz) · X: [@hyalisAI](https://x.com/hyalisAI)
@@ -216,6 +221,10 @@ The verifier checks that the leaf is the hash of the record, that the leaf sits 
 ## Market hours
 
 The Chainlink equity feeds update 24/5, from Sunday 20:00 to Friday 20:00 New York time, with no updates on Saturday. This was measured from the stored rounds, not assumed. While the market is closed, the engine makes no decisions and no fills, and only writes the hourly snapshot. Indicator windows count market hours only, so "24 hours" always means one trading day, and a Monday-morning window never compares against a frozen weekend price. NYSE holidays close the overnight session before them, and early-close days close at 13:00.
+
+## Security
+
+Our latest review, with every Slither finding and our triage, the bytecode check of the deployed contracts, and the trust assumptions in plain words: [AUDIT.md](AUDIT.md). It is our own review, not a third-party audit. To report a problem privately: [SECURITY.md](SECURITY.md).
 
 ## License
 
