@@ -79,8 +79,15 @@ await check("prices", "freshness", async () => {
 const agents = (await get("/v1/agents")) as any[];
 await check("agents", "house agents running", async () => {
   const house = agents.filter((a) => a.house);
-  const paused = house.filter((a) => a.status !== "active").map((a) => a.name);
-  return [house.length >= 4 && !paused.length ? "PASS" : "FAIL", `${house.length} house agents${paused.length ? `, paused: ${paused.join(", ")}` : ", all active"}`];
+  // Paused on purpose (by the operator, or its run ended) is fine; any other pause is a fault.
+  const onPurpose = (a: any) => a.pauseReason === "owner" || a.pauseReason === "ended";
+  const held = house.filter((a) => a.status !== "active" && onPurpose(a)).map((a) => a.name);
+  const stuck = house.filter((a) => a.status !== "active" && !onPurpose(a)).map((a) => `${a.name} (${a.pauseReason ?? "no reason"})`);
+  const active = house.length - held.length - stuck.length;
+  return [
+    active >= 4 && !stuck.length ? "PASS" : "FAIL",
+    `${house.length} house agents, ${active} active${held.length ? `; paused on purpose: ${held.join(", ")}` : ""}${stuck.length ? `; paused unexpectedly: ${stuck.join(", ")}` : ""}`,
+  ];
 });
 for (const a of agents.filter((x) => x.status === "active")) {
   await check("agents", `${a.name} trades every hour`, async () => {

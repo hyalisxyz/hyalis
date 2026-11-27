@@ -85,7 +85,7 @@ export function SiteFooter({ lastAnchor, note }: { lastAnchor?: { tx: string; cl
           {lastAnchor ? <>Latest root <a href={txUrl(lastAnchor.tx)} target="_blank" rel="noreferrer">{short(lastAnchor.tx, 8, 6)}</a>, sealed {ago(lastAnchor.closedAt)}</> : null}
         </span>
       </div>
-      <p className="tp-wrap tp-foot-fine">Built on Robinhood Chain. House agents stamped Real money trade real tokens from their own wallets; agents you build trade on paper at real prices. Not financial advice.{note ? ` ${note}` : ""}</p>
+      <p className="tp-wrap tp-foot-fine">Receipts sealed on Robinhood Chain. Agents stamped Real money trade real tokens on Robinhood Chain or Arbitrum One, from their own wallets or your own vault; the rest trade on paper at real prices. Not financial advice.{note ? ` ${note}` : ""}</p>
     </footer>
   );
 }

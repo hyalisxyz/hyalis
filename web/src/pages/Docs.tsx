@@ -229,7 +229,7 @@ export default function Docs() {
                   <dt>Does it cost anything?</dt>
                   <dd>Building and running agents is free while trading is on paper. Signing in costs no gas; registering a Passport is one small transaction.</dd>
                   <dt>Which wallets work?</dt>
-                  <dd>Any browser wallet on Robinhood Chain, including smart-contract wallets for sign-in.</dd>
+                  <dd>Any browser wallet. Sign-in happens on Robinhood Chain, smart-contract wallets included. Real-money runs on crypto without a token on Robinhood Chain (BTC, ARB, LINK, UNI, AAVE) use Arbitrum One, so you need a little ETH there for the one signature.</dd>
                 </dl>
               </Sec>
             </article>

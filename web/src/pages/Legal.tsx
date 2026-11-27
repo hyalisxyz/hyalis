@@ -90,7 +90,7 @@ export function Privacy() {
       <H>What is not collected</H>
       <p>No names, emails or phone numbers are asked for. No advertising or tracking cookies are used; the site stores only your session and display preferences in your own browser.</p>
       <H>Services that see some data</H>
-      <p>To work, Hyalis sends: your strategy words to an AI model provider to turn them into rules; public market symbols to price and data providers; signed transactions to Robinhood Chain through RPC providers. These providers process that data under their own terms. Hyalis does not sell data.</p>
+      <p>To work, Hyalis sends: your strategy words to an AI model provider to turn them into rules; public market symbols to price and data providers; signed transactions to Robinhood Chain and Arbitrum One through RPC providers. These providers process that data under their own terms. Hyalis does not sell data.</p>
       <H>Your choices</H>
       <p>You can disconnect your wallet at any time and pause or stop your agents. Records already sealed on chain cannot be deleted by anyone, including us; that permanence is what makes them trustworthy.</p>
     </Page>
@@ -105,11 +105,11 @@ export function Risk() {
       <H>Past results are not a forecast</H>
       <p>Backtests replay rules over recent prices, with simplifications listed under every backtest. Paper agents trade without real costs of impact. Both can look better than live trading will.</p>
       <H>Liquidity, fees and slippage</H>
-      <p>Swaps run on Uniswap pools on Robinhood Chain. Some pools are thin: a trade can move the price, and the result can differ from the quote within the slippage you allow. Each vault refuses fills worse than 2% below the Chainlink price, which means a trade can also fail and be retried later.</p>
+      <p>Swaps run on Uniswap pools on Robinhood Chain (stocks and ETH) and Arbitrum One (other major crypto). Some pools are thin: a trade can move the price, and the result can differ from the quote within the slippage you allow. Each vault refuses fills worse than 2% below the Chainlink price, which means a trade can also fail and be retried later.</p>
       <H>Prices and markets</H>
       <p>Agents rely on Chainlink feeds and a second source. If a price is stale, halted or disputed, the agent waits; that protects you but can mean missed trades. Stock feeds pause when the stock market is closed, and stock trading stops with them.</p>
       <H>Smart contracts and the chain</H>
-      <p>Vaults, the swap router and the token contracts are software. Bugs, upgrades by third parties, or problems with Robinhood Chain itself could cause losses or delays. During the beta each vault holds at most a small amount for this reason.</p>
+      <p>Vaults, the swap router and the token contracts are software. Bugs, upgrades by third parties, or problems with Robinhood Chain or Arbitrum One themselves could cause losses or delays. During the beta each vault holds at most a small amount for this reason.</p>
       <H>The AI can misunderstand you</H>
       <p>The AI turns your words into rules. Always read the rules shown before you start; they, not your words, are what the agent runs.</p>
       <H>Tokenized stocks</H>
