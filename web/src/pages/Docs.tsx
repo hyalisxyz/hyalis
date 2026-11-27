@@ -2,6 +2,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../lib/api";
 import { useData } from "../lib/useData";
+import { tokens } from "../lib/format";
 import { SiteFooter, SiteHeader } from "../components/Site";
 import "./landing.css";
 import "./docs.css";
@@ -59,6 +60,8 @@ function useActive(ids: string[]) {
 
 export default function Docs() {
   const stats = useData(api.stats, [], 60_000);
+  const token = useData(api.token, []);
+  const sym = `$${token.data?.symbol ?? "HYALIS"}`;
   const active = useActive(SECTIONS.map((s) => s.id));
   const origin = typeof window === "undefined" ? "" : window.location.origin;
   useEffect(() => {
@@ -102,7 +105,7 @@ export default function Docs() {
                   <li><b>Review before it runs.</b> You see the exact rules the AI wrote, anything it changed to fit the limits, and a backtest next to just holding.</li>
                   <li><b>Create the agent.</b> It starts on the next hourly check with $10,000 of paper money. Pause or resume it any time.</li>
                 </ol>
-                <p className="dc-note">Agents you build trade on paper for now: real prices, $10,000 of virtual money. The house agents stamped Real money trade real tokens on Uniswap from their own wallets. The free tier runs one agent.</p>
+                <p className="dc-note">Want real money instead? Open <Link className="dc-link" to="/app/markets">Markets</Link> and press Trade on a market: one signature makes your own vault, the agent trades it, and Stop (or an auto stop) sends everything back to your wallet. During the beta a vault holds at most $100. The free tier runs one agent.</p>
                 <p><Link className="dc-link" to="/app/new">Build your first agent</Link></p>
               </Sec>
 
@@ -186,15 +189,22 @@ export default function Docs() {
               </Sec>
 
               <Sec id="tiers" t="Tiers and the token">
+                <p>{sym} is the Hyalis token. Holding it unlocks more of the product; nothing has to be staked or locked, and your tier is read from your wallet the moment you connect.</p>
+                <ul className="dc-list">
+                  <li><b>More agents at once.</b> Each agent runs its own strategy, on paper or with real money.</li>
+                  <li><b>More AI builds a day.</b> Each build turns your words into checked rules and backtests them.</li>
+                  <li><b>The crowd on X in your rules.</b> Rules like "only when X is bullish" read the mood of real posts, sealed with links to them.</li>
+                  <li><b>Burn for a slot.</b> Burn {token.data ? tokens(token.data.burn.tokensPerSlot) : "500,000"} {sym} for one extra agent for {token.data?.burn.slotDays ?? 30} days. Burned tokens leave the supply for good.</li>
+                </ul>
                 <table className="dc-table">
-                  <thead><tr><th>Tier</th><th>Tokens held</th><th>Agents at once</th><th>AI builds a day</th></tr></thead>
+                  <thead><tr><th>Tier</th><th>{sym} held</th><th>Agents at once</th><th>AI builds a day</th><th>X mood in rules</th></tr></thead>
                   <tbody>
-                    <tr><td>Free</td><td>0</td><td>1</td><td>10</td></tr>
-                    <tr><td>Holder</td><td>1,000,000</td><td>3</td><td>50</td></tr>
-                    <tr><td>Whale</td><td>5,000,000</td><td>10</td><td>50</td></tr>
+                    {(token.data?.tiers ?? []).map((t) => (
+                      <tr key={t.name}><td>{t.name}</td><td>{t.minTokens.toLocaleString("en-US")}</td><td>{t.agents}</td><td>{t.compilesPerDay}</td><td>{t.social ? "Yes" : "No"}</td></tr>
+                    ))}
                   </tbody>
                 </table>
-                <p>The token launches on a Pons bonding curve; until then everyone is on the free tier. Tiers count whole tokens, not their price. You can also burn 500,000 tokens for one extra agent slot for 30 days. If you sell below your tier, your newest agents pause until slots return. Agents are never deleted.</p>
+                <p>{token.data?.launched ? `${sym} is live at ` : `${sym} launches on a Pons bonding curve; until then everyone is on the free tier. `}{token.data?.launched && token.data.address ? <code>{token.data.address}</code> : null}{token.data?.launched ? ". " : ""}Tiers count whole tokens, not their price, so they mean the same on the curve and after it graduates to Uniswap. We tested this against live Pons tokens before and after graduation. To burn, send the tokens to <code>0x000000000000000000000000000000000000dEaD</code>, then paste the transaction on your Wallet page. If you sell below your tier, your newest agents pause until slots return. Agents are never deleted.</p>
               </Sec>
 
               <Sec id="api" t="Public API">

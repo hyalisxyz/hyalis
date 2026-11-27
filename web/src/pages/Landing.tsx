@@ -266,7 +266,18 @@ function LiveProof({ receiptId }: { receiptId: number | null }) {
 /* ------------------------------------------------------------------ tiers */
 
 function Tiers({ token }: { token: any }) {
-  const tiers: Array<{ name: string; minTokens: number; agents: number; compilesPerDay: number }> = token?.tiers ?? [];
+  const tiers: Array<{ name: string; minTokens: number; agents: number; compilesPerDay: number; social?: boolean }> = token?.tiers ?? [];
+  const sym = `$${token?.symbol ?? "HYALIS"}`;
+  const free = tiers[0];
+  const top = tiers.at(-1);
+  const firstSocial = tiers.find((t) => t.social);
+  // What holding the token does, from the live tier table (so the page follows any change to it).
+  const uses = [
+    { t: "More agents at once", d: `${free?.agents ?? 1} free, up to ${top?.agents ?? 10} for ${top?.name ?? "Whale"}s. Each runs its own strategy around the clock.` },
+    { t: "More AI builds a day", d: `From ${free?.compilesPerDay ?? 10} to ${top?.compilesPerDay ?? 150} strategies a day turned into checked rules and backtested.` },
+    { t: "The crowd on X in your rules", d: `${firstSocial ? `${firstSocial.name} and up` : "Higher tiers"}: "only buy when X is bullish". The mood is read from real posts and sealed with links to them.` },
+    { t: "Burn for a slot", d: token ? `Burn ${tokens(token.burn.tokensPerSlot)} ${sym} for one more agent for ${token.burn.slotDays} days. Burned tokens are gone for good.` : `Burn ${sym} for extra agent slots. Burned tokens are gone for good.` },
+  ];
   const max = Math.max(6_000_000, (tiers.at(-1)?.minTokens ?? 5_000_000) * 1.2);
   const [held, setHeld] = useState(1_200_000);
   const idx = tiers.reduce((acc, t, i) => (held >= t.minTokens ? i : acc), 0);
@@ -276,13 +287,21 @@ function Tiers({ token }: { token: any }) {
     <section className="tp-field tp-tiers" id="token">
       <div className="tp-wrap tp-tiers-grid">
         <div>
-          <h2 className="tp-h2" data-reveal>Hold more, run more agents.</h2>
+          <h2 className="tp-h2" data-reveal>Hold {sym}, run more agents.</h2>
           <p className="tp-sub" data-reveal style={{ ["--d" as any]: 1 }}>
             {token?.launched
-              ? "Start free with one agent. Holders run three at once, whales ten, with more AI builds a day. Your tier follows the tokens in your wallet, read the moment you connect."
-              : "Start free with one agent. Holders run three at once, whales ten, with more AI builds a day. The token launches on a Pons bonding curve, and tiers switch on the moment it is live."}
+              ? `${sym} is what Hyalis runs on. Your tier follows the tokens in your wallet, read the moment you connect: no staking, no lock-up.`
+              : `${sym} launches on a Pons bonding curve, and every perk below works from its first block, before and after it graduates. Your tier follows the tokens in your wallet: no staking, no lock-up.`}
           </p>
-          {token ? <p className="tp-sub small">Or burn {tokens(token.burn.tokensPerSlot)} tokens for one more slot for {token.burn.slotDays} days. Selling tokens pauses extra agents; it never deletes them.</p> : null}
+          <ul className="tp-uses" data-reveal style={{ ["--d" as any]: 2 }}>
+            {uses.map((u) => (
+              <li key={u.t}>
+                <b>{u.t}</b>
+                <span>{u.d}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="tp-sub small">Selling below a tier pauses your newest agents until slots return; agents are never deleted.</p>
         </div>
         <div className="tp-till" data-reveal="print">
           <label className="tp-till-q" htmlFor="held">Tokens you hold</label>
@@ -305,6 +324,7 @@ function Tiers({ token }: { token: any }) {
             <div className="rc-row"><span>Tier</span><strong key={tier?.name}>{tier?.name ?? "Free"}</strong></div>
             <div className="rc-row"><span>Agents at once</span><b>{tier?.agents ?? 1}</b></div>
             <div className="rc-row"><span>AI builds a day</span><b>{tier?.compilesPerDay ?? 10}</b></div>
+            <div className="rc-row"><span>X mood in rules</span><b>{tier?.social ? "Yes" : "No"}</b></div>
             <div className="tp-slots" aria-hidden>
               {Array.from({ length: slots }, (_, i) => <i key={i} className={i < (tier?.agents ?? 1) ? "on" : ""} />)}
             </div>

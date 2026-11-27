@@ -26,6 +26,8 @@
 .dc-link { color: var(--field); font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
 .dc-link:hover { text-decoration-color: transparent; }
 .dc-addr { font: 400 14px/1.5 var(--mono); color: var(--field); text-decoration: underline; text-underline-offset: 3px; word-break: break-all; }
+.dc-list { margin: 0 0 20px; padding-left: 20px; }
+.dc-list li { margin: 0 0 8px; line-height: 1.55; }
 .dc-note { padding: 14px 18px; background: #fff; border-left: 4px solid var(--field); color: var(--thermal); font-size: 15.5px; }
 
 .dc-steps { margin: 0 0 20px; padding: 0; list-style: none; counter-reset: dc; }

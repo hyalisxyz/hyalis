@@ -192,6 +192,8 @@ export interface Tier {
   minTokens: number;
   agents: number;
   compilesPerDay: number;
+  /** Whether rules may read the mood of posts on X. */
+  social?: boolean;
 }
 
 export interface TokenInfo {
