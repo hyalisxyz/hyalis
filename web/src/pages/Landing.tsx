@@ -265,6 +265,33 @@ function LiveProof({ receiptId }: { receiptId: number | null }) {
 
 /* ------------------------------------------------------------------ tiers */
 
+/** The one official contract address, with a copy button: the guard against look-alike tokens. */
+function OfficialCa({ address, symbol }: { address: string; symbol: string }) {
+  const [copied, setCopied] = useState(false);
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(address);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      /* clipboard blocked: the address is selectable */
+    }
+  };
+  return (
+    <div className="tp-ca">
+      <span className="tp-ca-k">Official {symbol} contract · Robinhood Chain</span>
+      <div className="tp-ca-row">
+        <code className="tp-ca-v">{address}</code>
+        <button type="button" className="tp-ca-b" onClick={copy} aria-live="polite">{copied ? "Copied" : "Copy"}</button>
+      </div>
+      <span className="tp-ca-n">
+        Any other address is not ours.{" "}
+        <a href={`https://robinhoodchain.blockscout.com/token/${address}`} target="_blank" rel="noreferrer">View on explorer</a>
+      </span>
+    </div>
+  );
+}
+
 function Tiers({ token }: { token: any }) {
   const tiers: Array<{ name: string; minTokens: number; agents: number; compilesPerDay: number; social?: boolean }> = token?.tiers ?? [];
   const sym = `$${token?.symbol ?? "HYALIS"}`;
@@ -302,6 +329,7 @@ function Tiers({ token }: { token: any }) {
             ))}
           </ul>
           <p className="tp-sub small">Selling below a tier pauses your newest agents until slots return; agents are never deleted.</p>
+          {token?.launched && token.address ? <OfficialCa address={token.address} symbol={sym} /> : null}
         </div>
         <div className="tp-till" data-reveal="print">
           <label className="tp-till-q" htmlFor="held">Tokens you hold</label>

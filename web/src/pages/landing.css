@@ -49,6 +49,16 @@
 .tp-sub { margin: 22px 0 34px; max-width: 34em; font-size: 18px; line-height: 1.55; color: var(--on-field-2); }
 .tp-paper .tp-sub { color: var(--fade); }
 .tp-sub.small { font-size: 15.5px; margin-top: -14px; }
+/* The official contract address: one line of mono with a copy button. */
+.tp-ca { display: grid; gap: 8px; max-width: 34em; margin: 6px 0 0; padding: 16px 18px; border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 10px; background: rgba(0, 0, 0, 0.12); }
+.tp-ca-k { font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--on-field-2); }
+.tp-ca-row { display: flex; gap: 10px; align-items: center; min-width: 0; }
+.tp-ca-v { flex: 1; min-width: 0; overflow-wrap: anywhere; font-size: 14.5px; color: var(--on-field); user-select: all; }
+.tp-ca-b { flex: none; padding: 7px 14px; border: 0; border-radius: 999px; background: var(--on-field); color: var(--field); font-weight: 700; font-size: 14px; line-height: 1; cursor: pointer; }
+.tp-ca-b:hover { opacity: 0.9; }
+.tp-ca-n { font-size: 13.5px; color: var(--on-field-2); }
+.tp-ca-n a { color: var(--on-field); }
+
 /* What the token does: four short lines, a rule between them like items on a receipt. */
 .tp-uses { list-style: none; margin: -12px 0 30px; padding: 0; max-width: 34em; }
 .tp-uses li { display: grid; gap: 3px; padding: 12px 0; border-top: 1px dashed rgba(255, 255, 255, 0.28); }

@@ -52,7 +52,7 @@ All 96 Robinhood stock tokens were checked on chain (`data/stock-token-candidate
 
 ## Wallets, tiers and the token
 
-The project token will launch on a Pons bonding curve. Until `TOKEN_ADDRESS` is set, every wallet is on the free tier and everything else works the same.
+The project token is **$HYALIS** on Robinhood Chain: `0xcb5b905d404ef2021ce1583efb28f992467c5b47`, launched on a Pons V2 bonding curve (it graduates to Uniswap v4). Any other address is not ours. Without `TOKEN_ADDRESS` set, every wallet is on the free tier and everything else works the same.
 
 - **Tiers** are by whole tokens held, never by price, so they mean the same on the bonding curve and after graduation. Default: Free (0) = 1 agent, 10 AI compiles/day; Holder (1M) = 3 agents, 50/day; Whale (5M) = 10 agents, 50/day. Change with `TOKEN_TIERS`.
 - **Burns**: sending `BURN_TOKENS_PER_SLOT` (default 500k) to `0x…dEaD` or `0x0` and claiming the transaction adds one agent slot for `BURN_SLOT_DAYS` (30). Only the sender can claim, and each transaction counts once.
